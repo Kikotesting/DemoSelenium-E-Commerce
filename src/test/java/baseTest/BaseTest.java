@@ -50,10 +50,18 @@ public class BaseTest {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
+    public void scrollToPixels(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,arguments[0])",pixels);
+    }
+    public void scrollEndPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
     public void hoverElement(WebElement element) {
         Actions action = new Actions(driver);
         action.moveToElement(element);
-        action.click().build().perform();
+        action.build().perform();
     }
 
 }

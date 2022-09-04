@@ -14,8 +14,8 @@ public class AuthenticationPage extends BasePage {
     }
 
     //Creating users
-    @FindBy(className = "email_create") public WebElement emailAddressField;
-    @FindBy(className = "icon-user left") public WebElement createAccountButton;
+    @FindBy(xpath = "//*[@id=\"email_create\"]") public WebElement emailAddressField;
+    @FindBy(xpath = "//*[@id=\"SubmitCreate\"]/span") public WebElement createAccountButton;
 
     //Registered users
     @FindBy(name = "email") public WebElement alreadyRegisteredEmail;
@@ -24,4 +24,24 @@ public class AuthenticationPage extends BasePage {
     @FindBy(linkText = "Forgot your password?") public WebElement forgotPasswordLink;
 
 
+    public void setEmailAddress(String email){
+        emailAddressField.click();
+        emailAddressField.sendKeys(email);
+    }
+    public void clickCreateAccountButton(){
+        isElementDisplayed(createAccountButton);
+        createAccountButton.click();
+    }
+
+    public void setRegisteredMail(String email){
+        alreadyRegisteredEmail.clear();
+        alreadyRegisteredEmail.sendKeys(email);
+    }
+    public void setRegisteredPass(String password){
+        alreadyRegisteredPass.clear();
+        alreadyRegisteredPass.sendKeys("Kiko123@");
+    }
+    public void clickSignInButton(){
+        signInButton.click();
+    }
 }

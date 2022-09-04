@@ -18,28 +18,25 @@ public class HomePage extends BasePage {
     }
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/span") public WebElement leftNavbarCallusNumber;
-    @FindBy(className = "container") public WebElement bannerContainer;
-
-    @FindBy(xpath = "//*[@id=\"homeslider\"]/li[2]/a/img") public WebElement bannerPic2;
-    @FindBy(xpath = "//*[@id=\"homeslider\"]/li[3]/a/img") public WebElement bannerPic3;
-
+    @FindBy(xpath = "//*[@id=\"columns\"]") public WebElement bannerContainer;
 
     //Main menu
-    @FindBy(linkText = "Women") public WebElement mainMenuWomen;
-    @FindBy(linkText = "Dresses") public WebElement mainMenuDresses;
-    @FindBy(linkText = "T-shirts") public WebElement mainMenuTshirts;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a") public WebElement mainMenuWomen;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/a") public WebElement mainMenuDresses;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a") public WebElement mainMenuTshirts;
 
     //Return to homepage
     @FindBy(className = "logo img-responsive") public WebElement backButtonHome;
 
     //Cart button
-    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a") public WebElement cartButton;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/p") public WebElement cartEmptyMessage;
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]") public WebElement cartButton;
+
     //Searchbox
     @FindBy(name = "search_query") public WebElement searchBox;
     @FindBy(name = "submit_search") WebElement submitSearchButton;
     @FindBy(className = "lighter") public WebElement summerDressResult;
     @FindBy(className = "heading-counter") public WebElement headingCounterResults;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/p") public WebElement incorrectResults;
 
     //Account navigation
     @FindBy(className = "login") public WebElement signInButton;
@@ -60,11 +57,53 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/h5/a") public WebElement productOne;
     @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]/div/div[2]/h5/a") public WebElement productTwo;
 
+    // Hover elements on dashboard page
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]") public WebElement firstProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]/div/div[2]/div[2]/a[1]/span") public WebElement addToCart_FirstProduct;
+    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]") public WebElement alertAddProduct;
+    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[1]/h2") public WebElement successAddProductText;
+    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a/span") public WebElement processToCheckOut;
+
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[2]") public WebElement secondProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[3]") public WebElement thirdProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[4]") public WebElement fourthProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[5]") public WebElement fifthProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[6]") public WebElement sixthProduct;
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[7]") public WebElement seventhProduct;
+    @FindBy(id = "cmsinfo_block") public WebElement cmsInfoBlock;
+    @FindBy(className = "footer-container") public WebElement footerContainer;
+
+    //Social icons
+    @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[1]") public WebElement facebook;
+    @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[2]") public WebElement twitter;
+    @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[3]") public WebElement youtube;
+    @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[4]") public WebElement google_plus;
+
+
+    //Newsletters
+    @FindBy(id = "newsletter-input") public WebElement newLetter;
+    @FindBy(name = "submitNewsletter") public WebElement submitNewLetterBtn;
+    @FindBy(name = "submitNewsletter") public WebElement newsLetterMessage;
+    @FindBy(xpath = "//*[@id=\"columns\"]/p") public WebElement existNewsLetterMessage;
+
+
 
     //Click Elements
     public void clickElement(WebElement elementMenu){
         isElementDisplayed(elementMenu);
         elementMenu.click();
+    }
+
+    public void populateNewsLetterField(String mail){
+        isElementDisplayed(newLetter);
+        newLetter.clear();
+        newLetter.sendKeys(mail);
+    }
+    public void clickNewsLetterField(){
+        submitNewLetterBtn.click();
+    }
+    public void clickSignInButton(){
+        signInButton.click();
     }
     public void clickBannerArrowNext(){
         isElementDisplayed(bannerNext);
@@ -99,7 +138,6 @@ public class HomePage extends BasePage {
         Select select = new Select(sortDropdown);
         select.selectByValue("reference:desc");
     }
-
 
 
 
