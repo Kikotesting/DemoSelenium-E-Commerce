@@ -1,11 +1,12 @@
 package pages;
 
 import basePage.BasePage;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
 
@@ -54,22 +55,11 @@ public class HomePage extends BasePage {
     @FindBy(className = "homefeatured") public WebElement filterButtonPopular;
 
 
+    // Sort by Highest Price then Reference Highest
+    @FindBy(id = "selectProductSort") public WebElement sortDropdown;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/h5/a") public WebElement productOne;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]/div/div[2]/h5/a") public WebElement productTwo;
 
-
-
-    //Scrolling Elements
-    public void scrollToWebElement(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();",element);
-    }
-    public void scrollToPixels(int pixels) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,arguments[0])",pixels);
-    }
-    public void scrollEndPage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-    }
 
     //Click Elements
     public void clickElement(WebElement elementMenu){
@@ -97,6 +87,19 @@ public class HomePage extends BasePage {
         isElementDisplayed(cartButton);
         cartButton.click();
     }
+    public void clickSortDropdown(){
+        isElementDisplayed(sortDropdown);
+        sortDropdown.click();
+    }
+    public void selectValueHighestFirst(){
+        Select select = new Select(sortDropdown);
+        select.selectByValue("price:desc");
+    }
+    public void selectValueReferenceHighestFirst(){
+        Select select = new Select(sortDropdown);
+        select.selectByValue("reference:desc");
+    }
+
 
 
 

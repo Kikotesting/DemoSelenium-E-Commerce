@@ -2,9 +2,11 @@ package homepage;
 
 import baseTest.BaseTest;
 import custom.Highlighter;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 
@@ -42,7 +44,6 @@ public class HomePageTests extends BaseTest {
         homePage.clickBannerArrowPrev();
     }
 
-
     @Test
     @DisplayName("Search is functional and generating the correct result")
     void searchWithValidStocksData(){
@@ -65,6 +66,47 @@ public class HomePageTests extends BaseTest {
         homePage.waitToBeVisible(homePage.cartEmptyMessage, 3);
         Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(homePage.cartEmptyMessage));
     }
+
+    @Test
+    @DisplayName("Validates dropdown filter by Highest price and Reference Highest price")
+    void performDropdownFilter() throws InterruptedException {
+        homePage = new HomePage(driver);
+        homePage.clickSearchBoxAndType("Dress");
+        homePage.submitSearch();
+        scrollToElement(homePage.sortDropdown);
+        Highlighter.highlightElement(driver, homePage.sortDropdown);
+        homePage.clickSortDropdown();
+        homePage.selectValueHighestFirst();
+        homePage.waitSeconds(3);
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
+                        .contains("Printed Dress")
+                ,"Not correct!");
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.productTwo)
+                        .contains("Summer Dress")
+                ,"Not correct!");
+        homePage.clickSortDropdown();
+        Highlighter.highlightElement(driver, homePage.sortDropdown);
+        homePage.selectValueReferenceHighestFirst();
+        homePage.waitSeconds(3);
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
+                        .contains("Printed Chiffon Dress")
+                ,"Not correct!");
+    }
+
+    @Test
+    @DisplayName("Hover functionality - All menus and links")
+    void performHoverEffect(){
+        homePage = new HomePage(driver);
+        homePage.mainMenuWomen.click();
+
+/*        hoverElement(homePage.mainMenuTshirts);
+        Highlighter.highlightElement(driver, homePage.mainMenuTshirts);
+        hoverElement(homePage.mainMenuWomen);
+        Highlighter.highlightElement(driver, homePage.mainMenuWomen);
+        hoverElement(homePage.mainMenuDresses);
+        Highlighter.highlightElement(driver, homePage.mainMenuDresses);*/
+    }
+
 
 
 

@@ -5,19 +5,18 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
     public WebDriver driver;
+
 
     @BeforeAll
     static void beforeAllTests(){
@@ -45,6 +44,16 @@ public class BaseTest {
 
         System.out.println("Screenshot taken: "+screenshot.getAbsolutePath());
         FileUtils.copyFileToDirectory(pathScreenshot,pathProject);
+    }
+
+    public void scrollToElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    public void hoverElement(WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element);
+        action.click().build().perform();
     }
 
 }
