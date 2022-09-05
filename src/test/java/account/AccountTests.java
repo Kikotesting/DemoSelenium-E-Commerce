@@ -85,5 +85,4 @@ public class AccountTests extends BaseTest {
         Assertions.assertEquals(actualErrorMessage,accountPage.getTextFromElement(accountPage.errorMessage));
     }
 
-
 }
