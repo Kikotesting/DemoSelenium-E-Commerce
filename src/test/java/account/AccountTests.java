@@ -55,5 +55,4 @@ public class AccountTests extends BaseTest {
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
     }
 
-
 }
