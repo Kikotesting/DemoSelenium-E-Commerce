@@ -20,7 +20,7 @@ public class AuthenticationPage extends BasePage {
     //Registered users
     @FindBy(name = "email") public WebElement alreadyRegisteredEmail;
     @FindBy(name = "passwd") public WebElement alreadyRegisteredPass;
-    @FindBy(className = "icon-lock left") public WebElement signInButton;
+    @FindBy(xpath = "//*[@id=\"SubmitLogin\"]/span") public WebElement signInButton;
     @FindBy(linkText = "Forgot your password?") public WebElement forgotPasswordLink;
 
 

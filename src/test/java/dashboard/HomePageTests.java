@@ -1,4 +1,4 @@
-package homepage;
+package dashboard;
 
 import baseTest.BaseTest;
 import custom.Highlighter;

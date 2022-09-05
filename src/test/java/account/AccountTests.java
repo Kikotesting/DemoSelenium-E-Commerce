@@ -45,7 +45,7 @@ public class AccountTests extends BaseTest {
         homePage = new HomePage(driver);
         authenticationPage = new AuthenticationPage(driver);
         accountPage = new AccountPage(driver);
-
+        homePage.clickSignInButton();
         authenticationPage.setRegisteredMail("kikoProbenUser@mail.bg");
         authenticationPage.setRegisteredPass("Kiko123@");
         authenticationPage.clickSignInButton();
@@ -60,7 +60,7 @@ public class AccountTests extends BaseTest {
         homePage = new HomePage(driver);
         authenticationPage = new AuthenticationPage(driver);
         accountPage = new AccountPage(driver);
-
+        homePage.clickSignInButton();
         authenticationPage.setRegisteredMail("kikoProbenUser@mail.bg");
         authenticationPage.setRegisteredPass("Kiko123@");
         authenticationPage.clickSignInButton();
@@ -69,6 +69,20 @@ public class AccountTests extends BaseTest {
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
         accountPage.logOutButton.click();
         Assertions.assertEquals("Authentication",accountPage.getTextFromElement(accountPage.authenticationHeaderPage));
+    }
+    @Test
+    @Order(4)
+    @DisplayName("User cannot login with invalid credentials")
+    void userCannotLoginWithInvalidUserAndPass(){
+        homePage = new HomePage(driver);
+        authenticationPage = new AuthenticationPage(driver);
+        accountPage = new AccountPage(driver);
+        homePage.clickSignInButton();
+        authenticationPage.setRegisteredMail("truncho@mail.bg");
+        authenticationPage.setRegisteredPass("Ki838383838@");
+        authenticationPage.clickSignInButton();
+        String actualErrorMessage = "Authentication failed.";
+        Assertions.assertEquals(actualErrorMessage,accountPage.getTextFromElement(accountPage.errorMessage));
     }
 
 
