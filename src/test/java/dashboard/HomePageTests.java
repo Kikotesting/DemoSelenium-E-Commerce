@@ -146,6 +146,7 @@ public class HomePageTests extends BaseTest {
     @DisplayName("Verify cart container is empty until user doesn't add anything")
     void verifyShoppingCartIsEmpty(){
         homePage = new HomePage(driver);
+        shoppingCartPage = new ShoppingCartPage(driver);
         homePage.clickCartButton();
         shoppingCartPage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 3);
         Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
@@ -193,7 +194,7 @@ public class HomePageTests extends BaseTest {
         Assertions.assertEquals("Your shopping cart", actualProductPageHeader);
         scrollToElement(shoppingCartPage.Summary);
         shoppingCartPage.clickRemoveProduct();
-        homePage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 3);
+        homePage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 5);
         Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
 
     }

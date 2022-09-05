@@ -29,7 +29,7 @@ public class HomePage extends BasePage {
     @FindBy(className = "logo img-responsive") public WebElement backButtonHome;
 
     //Cart button
-    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]") public WebElement cartButton;
+    @FindBy(css = "#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a") public WebElement cartButton;
 
     //Searchbox
     @FindBy(name = "search_query") public WebElement searchBox;

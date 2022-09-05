@@ -24,12 +24,12 @@ public class AccountTests extends BaseTest {
         accountPage = new AccountPage(driver);
 
         homePage.clickSignInButton();
-        authenticationPage.setEmailAddress("kikoProbenUser@mail.bg"); // can change for the next cycle
+        authenticationPage.setEmailAddress("kikoguest1@mail.bg"); // can change for the next cycle
         authenticationPage.clickCreateAccountButton();
         authenticationPage.waitToBeVisible(accountPage.authenticationHeaderPage,2);
         Assertions.assertEquals("Authentication",accountPage.getTextFromElement(accountPage.authenticationHeaderPage));
         scrollToElement(accountPage.personalInformationBlock);
-        accountPage.populatePersonalInfo("Kiko","Kikonev","kikoProbenUser@mail.bg","Proba123@");
+        accountPage.populatePersonalInfo("Kiko","Kikonev","kikoguest1@mail.bg","Proba123@");
         scrollToElement(accountPage.personalAddress);
         accountPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","Kiko@proben.bg");
         scrollToElement(accountPage.registerButton);
@@ -46,10 +46,10 @@ public class AccountTests extends BaseTest {
         authenticationPage = new AuthenticationPage(driver);
         accountPage = new AccountPage(driver);
         homePage.clickSignInButton();
-        authenticationPage.setRegisteredMail("kikoProbenUser@mail.bg");
+        authenticationPage.setRegisteredMail("mislead@mail.bg");
         authenticationPage.setRegisteredPass("Kiko123@");
         authenticationPage.clickSignInButton();
-        accountPage.waitToBeVisible(accountPage.welcomeMessage,3);
+        accountPage.waitToBeVisible(accountPage.welcomeMessage,20);
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
     }
@@ -60,11 +60,12 @@ public class AccountTests extends BaseTest {
         homePage = new HomePage(driver);
         authenticationPage = new AuthenticationPage(driver);
         accountPage = new AccountPage(driver);
+
         homePage.clickSignInButton();
-        authenticationPage.setRegisteredMail("kikoProbenUser@mail.bg");
+        authenticationPage.setRegisteredMail("mislead@mail.bg");
         authenticationPage.setRegisteredPass("Kiko123@");
         authenticationPage.clickSignInButton();
-        accountPage.waitToBeVisible(accountPage.welcomeMessage,3);
+        accountPage.waitToBeVisible(accountPage.welcomeMessage,20);
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
         accountPage.logOutButton.click();

@@ -18,7 +18,7 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"order_step\"]/li[1]/span") public WebElement Summary;
     @FindBy(xpath = "//*[@id=\"product_1_1_0_0\"]/td[2]/p/a") public WebElement Description;
     @FindBy(xpath = "//*[@id=\"center_column\"]/p[2]/a[2]") public WebElement continueShoppingButton;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/p[2]/a[2]") public WebElement removeProduct;
+    @FindBy(xpath = "//*[@id=\"1_1_0_0\"]/i") public WebElement removeProduct;
     @FindBy(xpath = "//*[@id=\"center_column\"]/p") public WebElement cartEmptyMessage;
 
     public void clickContinueShopping(){
