@@ -1,6 +1,6 @@
 # Demo for AutomationPractiseWeb
 
-## Page Object Model
+## Using Page Object Model for practise automation on E-commerce website
 
 > Requirements:
 - IntelliJ idea
@@ -9,18 +9,20 @@
 - Chrome installed
 - Maven installed
 
-### Manipulate the DOM elements
+
+## Purpose for the project:
+Manipulate the DOM elements
 - Filters
 - Sliders
 - Clickable, Visible and Invisible elements
 - Alert and active screens 
 
-### Simulating Use cases End-To-End
+Simulating Use cases End-To-End
 - Create account
 - Login and Logout
 - Hover effects 
 - Assertions and Order prioritization
 
-### Screenshots after each test
-- If the test doesn't pass, must change the data inside!
+Screenshots after each test
+- report if the test passed or not passed, where is the problem!
 
