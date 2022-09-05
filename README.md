@@ -12,3 +12,6 @@
 - Hover effects 
 - Assertions and Order prioritization
 
+### Screenshots after all tests
+- If the test doesn't pass, must change the data inside!
+
