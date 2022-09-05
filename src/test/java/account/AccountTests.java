@@ -38,7 +38,6 @@ public class AccountTests extends BaseTest {
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
     }
-
     @Test
     @Order(2)
     @DisplayName("User can login with valid credentials")
@@ -53,6 +52,23 @@ public class AccountTests extends BaseTest {
         accountPage.waitToBeVisible(accountPage.welcomeMessage,3);
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
+    }
+    @Test
+    @Order(3)
+    @DisplayName("User can login and logout")
+    void userCanLoginWithAndLogout(){
+        homePage = new HomePage(driver);
+        authenticationPage = new AuthenticationPage(driver);
+        accountPage = new AccountPage(driver);
+
+        authenticationPage.setRegisteredMail("kikoProbenUser@mail.bg");
+        authenticationPage.setRegisteredPass("Kiko123@");
+        authenticationPage.clickSignInButton();
+        accountPage.waitToBeVisible(accountPage.welcomeMessage,3);
+        String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
+        Assertions.assertEquals(actualMessageAfterCreateAccount,accountPage.getTextFromElement(accountPage.welcomeMessage));
+        accountPage.logOutButton.click();
+        Assertions.assertEquals("Authentication",accountPage.getTextFromElement(accountPage.authenticationHeaderPage));
     }
 
 

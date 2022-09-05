@@ -58,6 +58,7 @@ public class AccountPage extends BasePage {
     @FindBy(id = "phone_mobile")WebElement mobilePhone;
     @FindBy(name = "alias")WebElement addressReference;
     @FindBy(xpath = "//*[@id=\"center_column\"]/p")public WebElement welcomeMessage;
+    @FindBy(className = "logout") public WebElement logOutButton;
     public void populatePersonalAddress(String firstname,
                                         String lastname,
                                         String address,
@@ -78,5 +79,6 @@ public class AccountPage extends BasePage {
         addressReference.clear();
         addressReference.sendKeys(emailReference);
     }
+
 
 }

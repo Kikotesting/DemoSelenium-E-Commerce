@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
 
     //Account navigation
     @FindBy(className = "login") public WebElement signInButton;
-    @FindBy(className = "logout") public WebElement logOutButton;
+
     @FindBy(linkText = "Contact us") public WebElement navRightContactUs;
 
     //Nav banner according
