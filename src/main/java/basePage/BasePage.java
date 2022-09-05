@@ -1,4 +1,5 @@
 package basePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -29,6 +30,11 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.withTimeout(Duration.ofSeconds(2));
     }
+    public void waitPresenceOfElementLocated(int seconds, By locator){
+        WebDriverWait wait = new WebDriverWait(driver,seconds);
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
     public void waitToBeVisible(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
         wait.pollingEvery(Duration.ofMillis(100));

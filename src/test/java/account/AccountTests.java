@@ -71,5 +71,4 @@ public class AccountTests extends BaseTest {
         Assertions.assertEquals("Authentication",accountPage.getTextFromElement(accountPage.authenticationHeaderPage));
     }
 
-
 }

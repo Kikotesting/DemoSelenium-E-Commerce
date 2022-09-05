@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,5 +65,14 @@ public class BaseTest {
         action.moveToElement(element);
         action.build().perform();
     }
+    public void waitRefreshedResultText(int seconds, WebElement element, String text){
+        WebDriverWait wait = new WebDriverWait(driver,seconds);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.
+                textToBe(By.xpath("//*[@id=\"center_column\"]/div[4]/div/div[2]")
+                        ,text)));
+    }
+
+
+
 
 }
