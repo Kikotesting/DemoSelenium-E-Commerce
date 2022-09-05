@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Dimension;
 import pages.HomePage;
 import pages.WomenPage;
 
@@ -109,17 +110,37 @@ public class WomenMenuTests extends BaseTest {
     @Test
     @Order(5)
     @DisplayName("User can choose product by price Slider")
-    void sliderFilterByPrice(){
+    void sliderFilterByPrice() throws InterruptedException {
         homePage = new HomePage(driver);
         womenPage = new WomenPage(driver);
 
         homePage.clickElement(homePage.mainMenuWomen);
         womenPage.waitToBeVisible(womenPage.filterheaderPrice, 2);
         scrollToElement(womenPage.filterheaderPrice);
-        String value = "$40 - $53.00";
-        womenPage.setSliderValue(value);
-        //waitRefreshedResultText(5,womenPage.priceRange,value);
-        Assertions.assertEquals("$40 - $53.00",womenPage.getSliderValue());
+        womenPage.waitToBeClickable(womenPage.leftSliderPrice, 3);
+        Assertions.assertTrue(womenPage.leftSliderPrice.isDisplayed());
+        womenPage.setSliderValue("$30.80 - $53.00");
+        womenPage.waitToBeVisible(womenPage.showingResults,10);
+        waitRefreshedResultText(15, womenPage.showingResults,"Showing 1 - 5 of 5 items");
+        scrollToElement(womenPage.showingResults);
+        String actualResult = womenPage.getTextFromElement(womenPage.showingResults);
+        Assertions.assertTrue(actualResult
+                .contains("Showing 1 - 5 of 5 items"),"Is not displayed all items!");
+
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Dropdown submenus effects")
+    void clickSubDropdownMenus(){
+        homePage = new HomePage(driver);
+        womenPage = new WomenPage(driver);
+
+        homePage.clickElement(homePage.mainMenuWomen);
+        womenPage.submenu_DressesDropdown.click();
+        womenPage.waitToBeVisible(womenPage.submenu_DressesDropdown_SummerDresses,3);
+        womenPage.submenu_TopsDropdown.click();
+        womenPage.waitToBeVisible(womenPage.submenu_TopsDropdown_Blouses,3);
     }
 
 }

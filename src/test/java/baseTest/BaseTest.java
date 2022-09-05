@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.WomenPage;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,6 +71,7 @@ public class BaseTest {
                 textToBe(By.xpath("//*[@id=\"center_column\"]/div[4]/div/div[2]")
                         ,text)));
     }
+
 
 
 
