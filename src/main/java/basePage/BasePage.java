@@ -1,23 +1,23 @@
 package basePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import custom.Highlighter;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-
     public WebDriver driver;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
-
     public boolean isElementDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
@@ -25,48 +25,131 @@ public class BasePage {
             return false;
         }
     }
-    //Wait elements
-    public void waitSeconds(int seconds){
-        WebDriverWait wait = new WebDriverWait(driver,seconds);
-        wait.withTimeout(Duration.ofSeconds(2));
-    }
-    public void waitPresenceOfElementLocated(int seconds, By locator){
-        WebDriverWait wait = new WebDriverWait(driver,seconds);
-        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    }
 
+
+    //Wait elements
+    public void waitUntilElementPresent(int waitSeconds){
+        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("")));
+    }
     public void waitToBeVisible(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
-        wait.pollingEvery(Duration.ofMillis(100));
+        wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
     public void waitToBeClickable(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
-        wait.pollingEvery(Duration.ofMillis(100));
+        wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.elementToBeClickable(element))
         );
     }
     public void waitToBeInvisible(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
-        wait.pollingEvery(Duration.ofMillis(100));
+        wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
+    public  void waitToRefreshElement(WebElement element, int seconds,String text){
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.textToBePresentInElement(element,text));
+    }
+    public void pauseSeconds(Integer seconds){
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void waitForJavascript(int maxWaitMillis, int pollDelimiter) throws InterruptedException {
+        double startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() < startTime + maxWaitMillis) {
+            String prevState = driver.getPageSource();
+            pauseSeconds(pollDelimiter); // <-- would need to wrap in a try catch
+            if (prevState.equals(driver.getPageSource())) {
+                return;
+            }
+        }
+    }
 
+    //Get something
     public String getTextFromElement(WebElement element) {
-        waitToBeVisible(element, 3);
+        waitToBeVisible(element, 10);
         return element.getText();
+    }
+    public String getTitle(){
+        return driver.getTitle();
+    }
+    public void getListElements(WebElement element){
+        List<WebElement> links = element.findElements(By.tagName("li"));
+        for (int i = 0; i < links.size(); i++){
+            Highlighter.highlightElement(driver,links.get(i));
+        }
+    }
+    public void clickOptionFromList(WebElement element,String option){
+        List<WebElement> links = element.findElements(By.tagName("p"));
+        for (int i = 0; i < links.size(); i++){
+            if (links.get(i).getText().equals(option)) {
+                System.out.println(links.get(i).getText());
+                links.get(i).click();
+            }
+        }
+    }
+
+    //Scroll elements
+    public void scrollToElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    public void scrollToPixels(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,arguments[0])",pixels);
+    }
+    public void scrollEndPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    //Select strategy
+    public Select selectElement(WebElement element){
+        return new Select(element);
+    }
+    public void selectOptionFromDropdown(WebElement element, String option){
+        selectElement(element).getOptions().contains(option);
+    }
+    public void selectByVisibleTextElement(WebElement element, String valueText){
+        selectElement(element).selectByVisibleText(valueText);
+    }
+    public void selectByValueElement(WebElement element, String value){
+        selectElement(element).selectByVisibleText(value);
+    }
+    public void selectByIndexElement(WebElement element, int index){
+        selectElement(element).selectByIndex(index);
+    }
+
+    //Hover element
+    public void hoverElement(WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element);
+        action.build().perform();
+    }
+    public void hoverElementClick(WebElement element){
+        Actions action = new Actions(driver);
+        action.moveToElement(element).click().perform();
+    }
+    public void clickElement(WebElement element){
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    //Input Fields
+    public void setInputText(WebElement element, String text){
+        isElementDisplayed(element);
+        element.sendKeys(text);
+    }
+    public void clearInputField(WebElement element){
+        isElementDisplayed(element);
+        element.clear();
     }
 
 
-/**        //Explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-        wait.until(ExpectedConditions.visibilityOf(element));
-
-        //Fluent wait
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-            .withTimeout(Duration.ofSeconds(15))
-            .pollingEvery(Duration.ofSeconds(3))
-            .ignoring(NoSuchElementException.class);
- */
 }

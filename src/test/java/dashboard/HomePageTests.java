@@ -126,7 +126,7 @@ public class HomePageTests extends BaseTest {
         Highlighter.highlightElement(driver, homePage.sortDropdown);
         homePage.clickSortDropdown();
         homePage.selectValueHighestFirst();
-        homePage.waitSeconds(3);
+        homePage.pauseSeconds(3);
         Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
                         .contains("Printed Dress")
                 ,"Not correct!");
@@ -136,7 +136,7 @@ public class HomePageTests extends BaseTest {
         homePage.clickSortDropdown();
         Highlighter.highlightElement(driver, homePage.sortDropdown);
         homePage.selectValueReferenceHighestFirst();
-        homePage.waitSeconds(3);
+        homePage.pauseSeconds(3);
         Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
                         .contains("Printed Chiffon Dress")
                 ,"Not correct!");

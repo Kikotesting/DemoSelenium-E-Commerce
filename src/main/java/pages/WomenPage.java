@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WomenPage extends BasePage {
 
@@ -63,6 +65,12 @@ public class WomenPage extends BasePage {
         for (int i = 1; i <= 10 ; i++) {
             leftSliderPrice.sendKeys(Keys.ARROW_RIGHT);
         }
+    }
+    public void waitRefreshedResultText(int seconds, WebElement element, String text){
+        WebDriverWait wait = new WebDriverWait(driver,seconds);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.
+                textToBe(By.xpath("//*[@id=\"center_column\"]/div[4]/div/div[2]")
+                        ,text)));
     }
 
 }

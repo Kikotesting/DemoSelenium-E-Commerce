@@ -30,7 +30,7 @@ public class WomenMenuTests extends BaseTest {
         Assertions.assertTrue(actualText
                 .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
         womenPage.clickFilterDresses();
-        waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
+        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
         scrollToElement(womenPage.showingResults);
         Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
                 .contains("Showing 1 - 5 of 5 items"),"Is not displayed correct counter!");
@@ -52,11 +52,11 @@ public class WomenMenuTests extends BaseTest {
         Assertions.assertTrue(actualText
                 .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
         womenPage.clickFilterDresses();
-        waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
+        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
         scrollToElement(womenPage.womenRightBlockTitle);
         womenPage.waitToBeVisible(womenPage.enabledFilters,4);
         womenPage.clickRemoveFilter();
-        waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 7 of 7 items");
+        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 7 of 7 items");
         Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
                 .contains("Showing 1 - 7 of 7 items"),"Does not removed");
 
@@ -77,14 +77,14 @@ public class WomenMenuTests extends BaseTest {
         Assertions.assertTrue(actualText
                 .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
         womenPage.clickFilterDresses(); // first filter
-        waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 5 of 5 items");
+        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 5 of 5 items");
         womenPage.clickFilterBlackColor();
-        waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 1 of 1 items");
+        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 1 of 1 items");
         womenPage.waitToBeVisible(womenPage.enabledFilters,4);
         womenPage.clickRemoveFilter(); // remove first filter
-        waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 2 of 2 items");
+        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 2 of 2 items");
         womenPage.clickRemoveFilter(); // remove second filter
-        waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 7 of 7 items");
+        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 7 of 7 items");
         Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
                 .contains("Showing 1 - 7 of 7 items"),"Does not removed");
     }
@@ -121,7 +121,7 @@ public class WomenMenuTests extends BaseTest {
         Assertions.assertTrue(womenPage.leftSliderPrice.isDisplayed());
         womenPage.setSliderValue("$30.80 - $53.00");
         womenPage.waitToBeVisible(womenPage.showingResults,10);
-        waitRefreshedResultText(15, womenPage.showingResults,"Showing 1 - 5 of 5 items");
+        womenPage.waitRefreshedResultText(15, womenPage.showingResults,"Showing 1 - 5 of 5 items");
         scrollToElement(womenPage.showingResults);
         String actualResult = womenPage.getTextFromElement(womenPage.showingResults);
         Assertions.assertTrue(actualResult
