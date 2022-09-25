@@ -3,7 +3,6 @@ package pages;
 import basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -93,16 +92,16 @@ public class HomePage extends BasePage {
         isElementDisplayed(elementMenu);
         elementMenu.click();
     }
-
-    public void populateNewsLetterField(String mail){
-        isElementDisplayed(newLetter);
-        newLetter.clear();
-        newLetter.sendKeys(mail);
+    public void setTextToField(WebElement element, String text){
+        isElementDisplayed(element);
+        element.clear();
+        element.sendKeys(text);
     }
-    public void clickNewsLetterField(){
+    public void submitNewsLetter_btn(){
         submitNewLetterBtn.click();
     }
     public void clickSignInButton(){
+        isElementDisplayed(signInButton);
         signInButton.click();
     }
     public void clickBannerArrowNext(){
@@ -113,30 +112,13 @@ public class HomePage extends BasePage {
         isElementDisplayed(bannerPrev);
         bannerPrev.click();
     }
-    public void clickSearchBoxAndType(String text){
-        isElementDisplayed(searchBox);
-        searchBox.clear();
-        searchBox.sendKeys(text);
-    }
-    public void submitSearch(){
+    public void submitSearchText_btn(){
         isElementDisplayed(submitSearchButton);
         submitSearchButton.click();
     }
     public void clickCartButton(){
         isElementDisplayed(cartButton);
         cartButton.click();
-    }
-    public void clickSortDropdown(){
-        isElementDisplayed(sortDropdown);
-        sortDropdown.click();
-    }
-    public void selectValueHighestFirst(){
-        Select select = new Select(sortDropdown);
-        select.selectByValue("price:desc");
-    }
-    public void selectValueReferenceHighestFirst(){
-        Select select = new Select(sortDropdown);
-        select.selectByValue("reference:desc");
     }
 
 

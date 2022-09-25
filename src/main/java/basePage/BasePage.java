@@ -109,7 +109,7 @@ public class BasePage {
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
-    //Select strategy
+    //Select elements
     public Select selectElement(WebElement element){
         return new Select(element);
     }
@@ -136,7 +136,7 @@ public class BasePage {
         Actions action = new Actions(driver);
         action.moveToElement(element).click().perform();
     }
-    public void clickElement(WebElement element){
+    public void clickElementJavascript(WebElement element){
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }

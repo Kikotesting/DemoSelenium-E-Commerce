@@ -14,7 +14,7 @@ public class WomenMenuTests extends BaseTest {
     HomePage homePage;
     WomenPage womenPage;
 
-    @Test
+   /* @Test
     @Order(1)
     @DisplayName("User can enable Filter and expect specific result")
     void selectFiltersForSpecificResult() throws InterruptedException {
@@ -141,6 +141,6 @@ public class WomenMenuTests extends BaseTest {
         womenPage.waitToBeVisible(womenPage.submenu_DressesDropdown_SummerDresses,3);
         womenPage.submenu_TopsDropdown.click();
         womenPage.waitToBeVisible(womenPage.submenu_TopsDropdown_Blouses,3);
-    }
+    }*/
 
 }

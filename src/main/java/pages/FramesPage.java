@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class FramesPage extends BasePage {
-
-    WebDriver driver;
     public FramesPage(WebDriver driver){
         super (driver);
         PageFactory.initElements(driver,this);

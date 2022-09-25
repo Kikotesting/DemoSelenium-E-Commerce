@@ -15,7 +15,7 @@ public class HomePageTests extends BaseTest {
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
 
-    @Test
+    /*@Test
     @Order(1)
     @DisplayName("Hover functionality - Main menus, ContactUs, SignIn, Popular, BestSellers, Products, Custom block, Footer social medias")
     void performHoverEffect(){
@@ -222,6 +222,6 @@ public class HomePageTests extends BaseTest {
             System.out.println(expectRegisteredUser);
         }
 
-    }
+    }*/
 
 }
