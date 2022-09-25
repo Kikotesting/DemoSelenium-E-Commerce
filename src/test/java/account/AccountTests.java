@@ -10,7 +10,6 @@ import pages.AuthenticationPage;
 import pages.HomePage;
 
 public class AccountTests extends BaseTest {
-
     HomePage homePage;
     AuthenticationPage authPage;
     AccountPage accPage;
@@ -48,9 +47,24 @@ public class AccountTests extends BaseTest {
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accPage.getTextFromElement(accPage.welcomeMessage));
     }
-
     @Test
     @Order(2)
+    @DisplayName("Cannot create an account with exist Email")
+    void CannotCreateAccountWithExistEmail() {
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+
+        homePage.clickSignInButton();
+        authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field, 10);
+        // Email can change for the next test (1)
+        authPage.setInputText(authPage.emailAddressForCreateAccount_field, "mislead@mail.bg");
+        authPage.clickCreateAccount_btn();
+        String actualAccErrorMessage = "An account using this email address has already been registered. Please enter a valid password or request a new one.";
+        Assertions.assertEquals(actualAccErrorMessage,authPage.getTextFromElement(authPage.accErrorMessage));
+    }
+    @Test
+    @Order(3)
     @DisplayName("User can login with valid credentials")
     void userCanLoginWithValidEmailAndPassword(){
         homePage = new HomePage(driver);
@@ -67,9 +81,8 @@ public class AccountTests extends BaseTest {
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accPage.getTextFromElement(accPage.welcomeMessage));
     }
-
     @Test
-    @Order(3)
+    @Order(4)
     @DisplayName("User can login and logout")
     void userCanLoginWithAndLogout(){
         homePage = new HomePage(driver);
@@ -89,10 +102,40 @@ public class AccountTests extends BaseTest {
         authPage.waitToBeVisible(accPage.breadcrumbHeader,10);
         Assertions.assertEquals("Authentication",accPage.getTextFromElement(accPage.breadcrumbHeader));
     }
+    @Test
+    @Order(5)
+    @DisplayName("User CANNOT login with invalid email text")
+    void userCannotLoginWithInvalidEmailText(){
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+
+        homePage.clickSignInButton();
+        authPage.setRegisteredMail("trunchomail.bg");
+        authPage.clickSignInButton();
+
+        String actualErrorMessage = "Invalid email address.";
+        Assertions.assertEquals(actualErrorMessage,authPage.getTextFromElement(authPage.errorMessage));
+    }
+    @Test
+    @Order(5)
+    @DisplayName("User CANNOT login only with password")
+    void userCannotLoginWithInvalidPassword(){
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+
+        homePage.clickSignInButton();
+        authPage.setRegisteredPass("19291929192");
+        authPage.clickSignInButton();
+
+        String actualErrorMessage = "An email address required.";
+        Assertions.assertEquals(actualErrorMessage,authPage.getTextFromElement(authPage.errorMessage));
+    }
 
     @Test
-    @Order(4)
-    @DisplayName("User cannot login with invalid credentials")
+    @Order(6)
+    @DisplayName("User CANNOT login with invalid credentials")
     void userCannotLoginWithInvalidUserAndPass(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
@@ -106,5 +149,6 @@ public class AccountTests extends BaseTest {
         String actualErrorMessage = "Authentication failed.";
         Assertions.assertEquals(actualErrorMessage,authPage.getTextFromElement(authPage.errorMessage));
     }
+
 
 }

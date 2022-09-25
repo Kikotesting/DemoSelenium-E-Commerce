@@ -21,6 +21,7 @@ public class AuthenticationPage extends BasePage {
     @FindBy(name = "passwd") public WebElement alreadyRegisteredPass;
     @FindBy(xpath = "//*[@id=\"SubmitLogin\"]/span") public WebElement signInButton;
     @FindBy(xpath = "//*[@id=\"center_column\"]/div[1]/ol")public WebElement errorMessage;
+    @FindBy(xpath = "//*[@id=\"create_account_error\"]/ol/li")public WebElement accErrorMessage;
     @FindBy(linkText = "Forgot your password?") public WebElement forgotPasswordLink;
 
     public void clickCreateAccount_btn(){
