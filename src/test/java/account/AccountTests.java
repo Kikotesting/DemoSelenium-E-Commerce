@@ -24,20 +24,20 @@ public class AccountTests extends BaseTest {
 
         homePage.clickSignInButton();
         authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field,10);
-        // Email can change for the next test (1)
-        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"kiko11211@mail.bg");
+        // Email can change for the next test!
+        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"mislead2@mail.bg");
         authPage.clickCreateAccount_btn();
         // Wait to be visible account page for populating all fields
         accPage.waitToBeVisible(accPage.breadcrumbHeader,10);
         Assertions.assertEquals("Authentication",accPage.getTextFromElement(accPage.breadcrumbHeader));
         // Populate the first block elements
         accPage.scrollToElement(accPage.personalInformation);
-        // Email can change for the next test (2)
-        accPage.populatePersonalInfo("Kiko","Kikonev","kiko11211@mail.bg","Proba123@");
+        // Email can change for the next test!
+        accPage.populatePersonalInfo("Kiko","Kikonev","mislead2@mail.bg","Proba123@");
         // Populate the second block elements
         accPage.scrollToElement(accPage.personalAddress);
-        // Email can change for the next test (3)
-        accPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","Kiko@p21.bg");
+        // Email can change for the next test!
+        accPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","mislead@reference.bg");
         // Click register button
         accPage.scrollToElement(accPage.register_btn);
         accPage.clickElementJavascript(accPage.register_btn);
@@ -50,7 +50,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(2)
     @DisplayName("Cannot create an account with exist Email")
-    void CannotCreateAccountWithExistEmail() {
+    void userCannotCreateAccountWithExistEmail() {
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -83,8 +83,8 @@ public class AccountTests extends BaseTest {
     }
     @Test
     @Order(4)
-    @DisplayName("User can login and logout")
-    void userCanLoginWithAndLogout(){
+    @DisplayName("User can login and logout from his account")
+    void userCanLogInAndLogout(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -104,7 +104,7 @@ public class AccountTests extends BaseTest {
     }
     @Test
     @Order(5)
-    @DisplayName("User CANNOT login with invalid email text")
+    @DisplayName("User CANNOT login with invalid email")
     void userCannotLoginWithInvalidEmailText(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
@@ -112,6 +112,7 @@ public class AccountTests extends BaseTest {
 
         homePage.clickSignInButton();
         authPage.setRegisteredMail("trunchomail.bg");
+        authPage.setRegisteredPass("123123");
         authPage.clickSignInButton();
 
         String actualErrorMessage = "Invalid email address.";
@@ -144,6 +145,22 @@ public class AccountTests extends BaseTest {
         homePage.clickSignInButton();
         authPage.setRegisteredMail("truncho@mail.bg");
         authPage.setRegisteredPass("Ki838383838@");
+        authPage.clickSignInButton();
+
+        String actualErrorMessage = "Authentication failed.";
+        Assertions.assertEquals(actualErrorMessage,authPage.getTextFromElement(authPage.errorMessage));
+    }
+    @Test
+    @Order(7)
+    @DisplayName("User CANNOT login with empty fields")
+    void userCannotLoginWithEmptyFields(){
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+
+        homePage.clickSignInButton();
+        authPage.setRegisteredMail("");
+        authPage.setRegisteredPass("");
         authPage.clickSignInButton();
 
         String actualErrorMessage = "Authentication failed.";
