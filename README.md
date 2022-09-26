@@ -38,6 +38,7 @@ Screenshots after each test:
 - TC.6 User CANNOT Login only with password
 - TC.7 CANNOT Login with **invalid** email and password
 - TC.8 CANNOT Login with **empty** fields
+- TC.9 CANNOT create account without required fields
 
 
 
