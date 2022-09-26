@@ -22,6 +22,7 @@ public class AuthenticationPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"SubmitLogin\"]/span") public WebElement signInButton;
     @FindBy(xpath = "//*[@id=\"center_column\"]/div[1]/ol")public WebElement errorMessage;
     @FindBy(xpath = "//*[@id=\"create_account_error\"]/ol/li")public WebElement accErrorMessage;
+
     @FindBy(linkText = "Forgot your password?") public WebElement forgotPasswordLink;
 
     public void clickCreateAccount_btn(){
@@ -34,7 +35,7 @@ public class AuthenticationPage extends BasePage {
     }
     public void setRegisteredPass(String password){
         alreadyRegisteredPass.clear();
-        alreadyRegisteredPass.sendKeys("Kiko123@");
+        alreadyRegisteredPass.sendKeys(password);
     }
     public void clickSignInButton(){
         signInButton.click();

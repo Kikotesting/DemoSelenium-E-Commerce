@@ -142,11 +142,12 @@ public class BasePage {
     }
 
     //Input Fields
-    public void setInputText(WebElement element, String text){
+    public void setTextToField(WebElement element, String text){
         isElementDisplayed(element);
+        element.clear();
         element.sendKeys(text);
     }
-    public void clearInputField(WebElement element){
+    public void clearTextToField(WebElement element){
         isElementDisplayed(element);
         element.clear();
     }

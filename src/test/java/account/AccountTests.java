@@ -25,7 +25,7 @@ public class AccountTests extends BaseTest {
         homePage.clickSignInButton();
         authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field,10);
         // Email can change for the next test (1)
-        authPage.setInputText(authPage.emailAddressForCreateAccount_field,"kiko11211@mail.bg");
+        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"kiko11211@mail.bg");
         authPage.clickCreateAccount_btn();
         // Wait to be visible account page for populating all fields
         accPage.waitToBeVisible(accPage.breadcrumbHeader,10);
@@ -58,7 +58,7 @@ public class AccountTests extends BaseTest {
         homePage.clickSignInButton();
         authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field, 10);
         // Email can change for the next test (1)
-        authPage.setInputText(authPage.emailAddressForCreateAccount_field, "mislead@mail.bg");
+        authPage.setTextToField(authPage.emailAddressForCreateAccount_field, "mislead@mail.bg");
         authPage.clickCreateAccount_btn();
         String actualAccErrorMessage = "An account using this email address has already been registered. Please enter a valid password or request a new one.";
         Assertions.assertEquals(actualAccErrorMessage,authPage.getTextFromElement(authPage.accErrorMessage));

@@ -62,7 +62,7 @@ public class AccountPage extends BasePage {
                                         String lastname,
                                         String address,
                                         String city,
-                                        String postalcode,
+                                        String postalCode,
                                         String mobile,
                                         String emailReference){
         inputFirstName.sendKeys(firstname);
@@ -71,7 +71,7 @@ public class AccountPage extends BasePage {
         inputCity.sendKeys(city);
         Select selectState = new Select(stateDropdown);
         selectState.selectByValue("43");
-        zipPostalCode.sendKeys(postalcode);
+        zipPostalCode.sendKeys(postalCode);
         Select selectCountry = new Select(countryDropdown);
         selectCountry.selectByValue("21");
         mobilePhone.sendKeys(mobile);

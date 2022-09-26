@@ -20,9 +20,10 @@ Manipulate the DOM elements
 Simulating Use cases End-To-End
 - Create account
 - Login and Logout
+- Cannot login with invalid credentials
 - Hover effects 
 - Assertions and Order prioritization
 
 Screenshots after each test
-- report if the test passed or not passed, where is the problem!
+- Report if the test passed or not passed, where is the problem!
 

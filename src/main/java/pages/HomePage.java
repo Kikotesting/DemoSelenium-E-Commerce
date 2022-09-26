@@ -85,18 +85,6 @@ public class HomePage extends BasePage {
     @FindBy(name = "submitNewsletter") public WebElement newsLetterMessage;
     @FindBy(xpath = "//*[@id=\"columns\"]/p") public WebElement existNewsLetterMessage;
 
-
-
-    //Click Elements
-    public void clickElement(WebElement elementMenu){
-        isElementDisplayed(elementMenu);
-        elementMenu.click();
-    }
-    public void setTextToField(WebElement element, String text){
-        isElementDisplayed(element);
-        element.clear();
-        element.sendKeys(text);
-    }
     public void submitNewsLetter_btn(){
         submitNewLetterBtn.click();
     }
