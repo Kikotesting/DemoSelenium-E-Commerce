@@ -15,7 +15,7 @@ public class HomePageTests extends BaseTest {
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
 
-    @Test
+    /*@Test
     @Order(1)
     @DisplayName("Hover functionality - Main menus, ContactUs, SignIn, Popular, BestSellers, Products, Custom block, Footer social medias")
     void performHoverEffect(){
@@ -126,7 +126,7 @@ public class HomePageTests extends BaseTest {
         Highlighter.highlightElement(driver, homePage.sortDropdown);
         homePage.clickSortDropdown();
         homePage.selectValueHighestFirst();
-        homePage.waitSeconds(3);
+        homePage.pauseSeconds(3);
         Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
                         .contains("Printed Dress")
                 ,"Not correct!");
@@ -136,7 +136,7 @@ public class HomePageTests extends BaseTest {
         homePage.clickSortDropdown();
         Highlighter.highlightElement(driver, homePage.sortDropdown);
         homePage.selectValueReferenceHighestFirst();
-        homePage.waitSeconds(3);
+        homePage.pauseSeconds(3);
         Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
                         .contains("Printed Chiffon Dress")
                 ,"Not correct!");
@@ -222,6 +222,6 @@ public class HomePageTests extends BaseTest {
             System.out.println(expectRegisteredUser);
         }
 
-    }
+    }*/
 
 }
