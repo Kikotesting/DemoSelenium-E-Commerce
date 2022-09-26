@@ -17,7 +17,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(1)
     @DisplayName("Create an account with NEW Email")
-    void CreateAnAccount(){
+    void CreateAnAccount_TC1(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -25,7 +25,7 @@ public class AccountTests extends BaseTest {
         homePage.clickSignInButton();
         authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field,10);
         // Email can change for the next test!
-        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"mislead2@mail.bg");
+        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"mislead3@mail.bg");
         authPage.clickCreateAccount_btn();
         // Wait to be visible account page for populating all fields
         accPage.waitToBeVisible(accPage.breadcrumbHeader,10);
@@ -33,11 +33,11 @@ public class AccountTests extends BaseTest {
         // Populate the first block elements
         accPage.scrollToElement(accPage.personalInformation);
         // Email can change for the next test!
-        accPage.populatePersonalInfo("Kiko","Kikonev","mislead2@mail.bg","Proba123@");
+        accPage.populatePersonalInfo("Kiko","Kikonev","mislead3@mail.bg","Proba123@");
         // Populate the second block elements
         accPage.scrollToElement(accPage.personalAddress);
         // Email can change for the next test!
-        accPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","mislead@reference.bg");
+        accPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","mislead@reference3.bg");
         // Click register button
         accPage.scrollToElement(accPage.register_btn);
         accPage.clickElementJavascript(accPage.register_btn);
@@ -50,7 +50,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(2)
     @DisplayName("Cannot create an account with exist Email")
-    void userCannotCreateAccountWithExistEmail() {
+    void userCannotCreateAccountWithExistEmail_TC2() {
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -66,7 +66,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(3)
     @DisplayName("User can login with valid credentials")
-    void userCanLoginWithValidEmailAndPassword(){
+    void userCanLoginWithValidEmailAndPassword_TC3(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -84,7 +84,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(4)
     @DisplayName("User can login and logout from his account")
-    void userCanLogInAndLogout(){
+    void userCanLogInAndLogout_TC4(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -105,7 +105,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(5)
     @DisplayName("User CANNOT login with invalid email")
-    void userCannotLoginWithInvalidEmailText(){
+    void userCannotLoginWithInvalidEmailText_TC5(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -121,7 +121,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(5)
     @DisplayName("User CANNOT login only with password")
-    void userCannotLoginWithInvalidPassword(){
+    void userCannotLoginWithInvalidPassword_TC6(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -137,7 +137,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(6)
     @DisplayName("User CANNOT login with invalid credentials")
-    void userCannotLoginWithInvalidUserAndPass(){
+    void userCannotLoginWithInvalidUserAndPass_TC7(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -153,7 +153,7 @@ public class AccountTests extends BaseTest {
     @Test
     @Order(7)
     @DisplayName("User CANNOT login with empty fields")
-    void userCannotLoginWithEmptyFields(){
+    void userCannotLoginWithEmptyFields_TC8(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
         accPage = new AccountPage(driver);
@@ -167,5 +167,32 @@ public class AccountTests extends BaseTest {
         Assertions.assertEquals(actualErrorMessage,authPage.getTextFromElement(authPage.errorMessage));
     }
 
+    @Test
+    @Order(8)
+    @DisplayName("Try to create account without required fields")
+    void userCannotCreateAccountWithoutRequiredFields_TC9(){
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+
+        homePage.clickSignInButton();
+        authPage.waitToBeVisible(authPage.emailAddressForCreateAccount_field,10);
+
+        authPage.setTextToField(authPage.emailAddressForCreateAccount_field,"misleadRequired@mail.bg");
+        authPage.clickCreateAccount_btn();
+        // Wait to be visible account page for populating all fields
+        accPage.waitToBeVisible(accPage.breadcrumbHeader,10);
+        Assertions.assertEquals("Authentication",accPage.getTextFromElement(accPage.breadcrumbHeader));
+        // Populate the first block elements
+        accPage.scrollToElement(accPage.personalInformation);
+        accPage.populatePersonalInfo("Kiko","Kikonev","misleadRequired@mail.bg","Proba123@");
+        // Click register button
+        accPage.scrollToElement(accPage.register_btn);
+        accPage.clickElementJavascript(accPage.register_btn);
+        // Wait until error message is displayed for empty required fields
+        accPage.waitToBeVisible(accPage.errorRequiredMessage,10);
+        accPage.scrollToElement(accPage.errorRequiredMessage);
+        Assertions.assertTrue(accPage.errorRequiredMessage.getText().contains("There is error"),"Changed!");
+    }
 
 }
