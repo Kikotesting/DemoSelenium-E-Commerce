@@ -5,7 +5,7 @@
 > #### Requirements:
 > - IntelliJ idea
 > - Java sdk 17+
-> - Java installed
+> - JUnit5 and Selenium dependencies
 > - Chrome installed
 > - Maven installed
 
@@ -28,8 +28,20 @@ Simulating Use cases End-To-End:
 Screenshots after each test:
 - Report if the test passed or not passed, where is the problem!
 
-## Cover test scenarios
-### 1. Create an Account, LogIn, LogOut
+## Covered test scenarios
+
+### 1.Subscribe for newsletters, 
+- TC.1 Search valid stocks data in searchBox field
+- TC.2 Subscribe your mail for newsletters
+- TC.3 Cannot subscribe exist mail for newsletters
+
+
+
+
+
+
+
+### 2.Create an Account, LogIn, LogOut
 - TC.1 Create An account with NEW email
 - TC.2 Cannot create an account with exist email
 - TC.3 User can Login with **valid** email and password
@@ -39,6 +51,8 @@ Screenshots after each test:
 - TC.7 CANNOT Login with **invalid** email and password
 - TC.8 CANNOT Login with **empty** fields
 - TC.9 CANNOT create account without required fields
+
+
 
 
 

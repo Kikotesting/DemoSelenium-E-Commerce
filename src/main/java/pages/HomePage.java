@@ -33,8 +33,9 @@ public class HomePage extends BasePage {
     //Searchbox
     @FindBy(name = "search_query") public WebElement searchBox;
     @FindBy(name = "submit_search") WebElement submitSearchButton;
-    @FindBy(className = "lighter") public WebElement summerDressResult;
-    @FindBy(className = "heading-counter") public WebElement headingCounterResults;
+
+    @FindBy(xpath = "//*[@id=\"center_column\"]/h1/span[1]") public WebElement lighterSearchWord;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/h1/span[2]") public WebElement counterSearchResults;
     @FindBy(xpath = "//*[@id=\"center_column\"]/p") public WebElement incorrectResults;
 
     //Account navigation
@@ -80,13 +81,12 @@ public class HomePage extends BasePage {
 
 
     //Newsletters
-    @FindBy(id = "newsletter-input") public WebElement newLetter;
-    @FindBy(name = "submitNewsletter") public WebElement submitNewLetterBtn;
-    @FindBy(name = "submitNewsletter") public WebElement newsLetterMessage;
-    @FindBy(xpath = "//*[@id=\"columns\"]/p") public WebElement existNewsLetterMessage;
+    @FindBy(id = "newsletter-input") public WebElement newsLetterInput;
+    @FindBy(name = "submitNewsletter") public WebElement submitNewLetter_btn;
+    @FindBy(xpath = "//*[@id=\"columns\"]/p") public WebElement newsLetterMessage;
 
     public void submitNewsLetter_btn(){
-        submitNewLetterBtn.click();
+        submitNewLetter_btn.click();
     }
     public void clickSignInButton(){
         isElementDisplayed(signInButton);

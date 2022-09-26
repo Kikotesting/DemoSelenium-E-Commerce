@@ -2,10 +2,7 @@ package dashboard;
 
 import baseTest.BaseTest;
 import custom.Highlighter;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import pages.HomePage;
 import pages.ShoppingCartPage;
@@ -15,7 +12,7 @@ public class HomePageTests extends BaseTest {
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
 
-    /*@Test
+/*    @Test
     @Order(1)
     @DisplayName("Hover functionality - Main menus, ContactUs, SignIn, Popular, BestSellers, Products, Custom block, Footer social medias")
     void performHoverEffect(){
@@ -72,21 +69,6 @@ public class HomePageTests extends BaseTest {
         Assertions.assertTrue(actualCallUsNumber.
                         contains("Call us now: 0123-456-789"),
                 "Message is not correct!");
-    }
-    @Test
-    @Order(3)
-    @DisplayName("Search functionality - correct results with valid data")
-    void searchWithValidStocksData(){
-
-        homePage = new HomePage(driver);
-        homePage.clickSearchBoxAndType("Summer dress");
-        homePage.submitSearch();
-        homePage.waitToBeVisible(homePage.summerDressResult, 5);
-        homePage.waitToBeVisible(homePage.headingCounterResults, 5);
-
-        Assertions.assertTrue(homePage.getTextFromElement(homePage.headingCounterResults)
-                        .contains("have been found"),
-                "Result is different!");
     }
     @Test
     @Order(4)
@@ -197,31 +179,56 @@ public class HomePageTests extends BaseTest {
         homePage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 5);
         Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
 
-    }
-
-    @Test
-    @Order(10)
-    @DisplayName("Subscribe your mail for newsletters")
-    void subscribeYourEmailForNewsLetters(){
-        homePage = new HomePage(driver);
-        scrollEndPage();
-        homePage.populateNewsLetterField("perko@mail.bg");
-        homePage.clickNewsLetterField();
-        homePage.waitToBeVisible(homePage.newsLetterMessage, 3);
-
-        String actualMessageNew = homePage.getTextFromElement(homePage.newsLetterMessage);
-        String actualMessageExisted= homePage.getTextFromElement(homePage.existNewsLetterMessage);
-
-        String expectNewUser = "Newsletter : You have successfully subscribed to this newsletter.";
-        String expectRegisteredUser = "Newsletter : This email address is already registered.";
-
-        if (actualMessageNew.equals(expectNewUser)){
-            Assertions.assertEquals(expectNewUser,actualMessageNew);
-        }else {
-            Assertions.assertEquals(expectRegisteredUser,actualMessageExisted);
-            System.out.println(expectRegisteredUser);
-        }
-
     }*/
 
+
+    @Test
+    @Order(1)
+    @DisplayName("Search valid stocks data in searchBox field")
+    void searchWithValidStocksData(){
+        homePage = new HomePage(driver);
+
+        homePage.setTextToField(homePage.searchBox,"dresses");
+        homePage.submitSearchText_btn();
+        homePage.waitToBeVisible(homePage.lighterSearchWord, 5);
+        homePage.waitToBeVisible(homePage.counterSearchResults, 5);
+
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.lighterSearchWord)
+                        .contains("DRESSES"),
+                "Result is different!");
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.counterSearchResults)
+                        .contains("7 results have been found."),
+                "Result is different!");
+    }
+    @Test
+    @Order(2)
+    @DisplayName("Subscribe your mail for newsletters")
+    void subscribeYourEmailForNewsLetters_TC2(){
+        homePage = new HomePage(driver);
+        // Go to the end on webPage
+        homePage.scrollEndPage();
+        // Change the email for new user
+        homePage.setTextToField(homePage.newsLetterInput, "newhdfhdfh24@mail.bg");
+        homePage.submitNewsLetter_btn();
+        homePage.waitToBeVisible(homePage.newsLetterMessage, 5);
+        String newUser = "Newsletter : You have successfully subscribed to this newsletter.";
+        Assertions.assertEquals(newUser,homePage.newsLetterMessage.getText(),"Wrong text!");
+
+        String registeredUser = "Newsletter : This email address is already registered.";
+        Assertions.assertEquals(registeredUser,homePage.newsLetterMessage.getText(),"Wrong text!");
+    }
+    @Test
+    @Order(2)
+    @DisplayName("Cannot subscribe exist email for newsletters")
+    void cannotSubscribeExistEmail_TC3(){
+        homePage = new HomePage(driver);
+        // Go to the end on webPage
+        homePage.scrollEndPage();
+        // Second time when the test is executed will see the 'else' decision from the if-else element
+        homePage.setTextToField(homePage.newsLetterInput, "mislead@mail.bg");
+        homePage.submitNewsLetter_btn();
+        homePage.waitToBeVisible(homePage.newsLetterMessage, 5);
+        String registeredUser = "Newsletter : This email address is already registered.";
+        Assertions.assertEquals(registeredUser,homePage.newsLetterMessage.getText(),"Wrong text!");
+    }
 }

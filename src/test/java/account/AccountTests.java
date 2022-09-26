@@ -192,7 +192,6 @@ public class AccountTests extends BaseTest {
         // Wait until error message is displayed for empty required fields
         accPage.waitToBeVisible(accPage.errorRequiredMessage,10);
         accPage.scrollToElement(accPage.errorRequiredMessage);
-        Assertions.assertTrue(accPage.errorRequiredMessage.getText().contains("There is error"),"Changed!");
+        Assertions.assertTrue(accPage.errorRequiredMessage.getText().contains("error"),"Changed!");
     }
-
 }
