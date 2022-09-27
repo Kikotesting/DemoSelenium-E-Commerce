@@ -16,12 +16,14 @@ public class WomenPage extends BasePage {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement womenRightBlockTitle;
+    //Left block element
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement leftHeader_BlockTitle;
+
     @FindBy(xpath = "//*[@id=\"layered_form\"]/div/div[10]/div/span") public WebElement filterHeaderPrice;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/div[3]/div[1]/ul/li[1]") public WebElement viewTypes;
+
+
     @FindBy(xpath = "//*[@id=\"center_column\"]/div[3]/div[2]/div[2]") public WebElement showingResults;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div") public WebElement firstProductGridView;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div") public WebElement firstProductListView;
+
 
     //Submenus
     @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/span")  public WebElement submenu_DressesDropdown;
@@ -29,9 +31,24 @@ public class WomenPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/span")  public WebElement submenu_TopsDropdown;
     @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/ul/li[2]/a")  public WebElement submenu_TopsDropdown_Blouses;
 
-    //View buttons
-    @FindBy(xpath = "//*[@id=\"grid\"]/a/i") public WebElement gridBtn;
-    @FindBy(xpath = "//*[@id=\"list\"]/a/i") public WebElement listBtn;
+    //View buttons and product elements
+    @FindBy(xpath = "//*[@id=\"subcategories\"]") public WebElement subCategories_div;
+    @FindBy(xpath = "//*[@id=\"grid\"]/a/i") WebElement grid_btn;
+    @FindBy(xpath = "//*[@id=\"list\"]/a/i") WebElement list_btn;
+    @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Faded')]") public WebElement product_FadedShortSleeve;
+    @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Blouse')]") public WebElement product_Blouse;
+    @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Printed Dress')]") public WebElement product_PrintedDress;
+
+
+
+
+
+
+
+
+
+
+
 
     //Filter from catalogue
     @FindBy(xpath = "//*[@id=\"enabled_filters\"]/span") public WebElement enabledFilters;
@@ -40,12 +57,15 @@ public class WomenPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"ul_layered_id_attribute_group_3\"]/li[3]/label/a") public WebElement filterColorBlack;
     @FindBy(xpath = "//*[@id=\"layered_price_slider\"]/a[1]") public WebElement leftSliderPrice;
 
-    public void clickGridView(){
-        gridBtn.click();
+    public void clickGridViews(){
+        isElementDisplayed(grid_btn);
+        grid_btn.click();
     }
-    public void clickListView(){
-        listBtn.click();
+    public void clickListViews(){
+        isElementDisplayed(list_btn);
+        list_btn.click();
     }
+
     public void clickFilterDresses(){
         filterDresses.click();
     }
