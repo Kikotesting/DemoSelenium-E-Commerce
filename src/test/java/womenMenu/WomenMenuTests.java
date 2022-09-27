@@ -90,24 +90,6 @@ public class WomenMenuTests extends BaseTest {
     }
 
     @Test
-    @Order(4)
-    @DisplayName("User can change typeViews on WomenPage")
-    void changeTypeViews(){
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.womenRightBlockTitle, 2);
-        scrollToElement(womenPage.viewTypes);
-        womenPage.clickListView();
-        hoverElement(womenPage.firstProductListView);
-        Highlighter.highlightElement(driver,womenPage.firstProductListView);
-        womenPage.clickGridView();
-        hoverElement(womenPage.firstProductGridView);
-        Highlighter.highlightElement(driver,womenPage.firstProductGridView);
-
-    }
-
-    @Test
     @Order(5)
     @DisplayName("User can choose product by price Slider")
     void sliderFilterByPrice() throws InterruptedException {
@@ -142,5 +124,35 @@ public class WomenMenuTests extends BaseTest {
         womenPage.submenu_TopsDropdown.click();
         womenPage.waitToBeVisible(womenPage.submenu_TopsDropdown_Blouses,3);
     }*/
+   @Test
+   @Order(1)
+   @DisplayName("User can change typeViews (Grid and List) and hover the elements")
+   void changeTypeViewsAndHoverElement_TC1(){
+       homePage = new HomePage(driver);
+       womenPage = new WomenPage(driver);
+
+       homePage.clickElementJavascript(homePage.mainMenuWomen);
+
+       womenPage.waitToBeVisible(womenPage.leftHeader_BlockTitle, 10);
+       womenPage.scrollToElement(womenPage.subCategories_div);
+       womenPage.pauseSeconds(2);
+       // List view and hover the elements
+       womenPage.clickListViews();
+       womenPage.scrollToElement(womenPage.product_FadedShortSleeve);
+       womenPage.hoverElement(womenPage.product_FadedShortSleeve);
+       womenPage.pauseSeconds(1);
+       womenPage.scrollToElement(womenPage.product_Blouse);
+       womenPage.hoverElement(womenPage.product_Blouse);
+       womenPage.pauseSeconds(1);
+
+       // Grid view and hover the elements
+       womenPage.clickGridViews();
+       womenPage.hoverElement(womenPage.product_FadedShortSleeve);
+       womenPage.pauseSeconds(1);
+       womenPage.hoverElement(womenPage.product_Blouse);
+       womenPage.pauseSeconds(1);
+       womenPage.hoverElement(womenPage.product_PrintedDress);
+       womenPage.pauseSeconds(1);
+   }
 
 }

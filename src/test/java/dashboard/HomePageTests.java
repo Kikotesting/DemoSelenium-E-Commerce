@@ -185,13 +185,14 @@ public class HomePageTests extends BaseTest {
     @Test
     @Order(1)
     @DisplayName("Search valid stocks data in searchBox field")
-    void searchWithValidStocksData(){
+    void searchWithValidStocksData_TC1(){
         homePage = new HomePage(driver);
 
         homePage.setTextToField(homePage.searchBox,"dresses");
         homePage.submitSearchText_btn();
         homePage.waitToBeVisible(homePage.lighterSearchWord, 5);
         homePage.waitToBeVisible(homePage.counterSearchResults, 5);
+        homePage.scrollToElement(homePage.lighterSearchWord);
 
         Assertions.assertTrue(homePage.getTextFromElement(homePage.lighterSearchWord)
                         .contains("DRESSES"),
