@@ -17,7 +17,7 @@ public class WomenPage extends BasePage {
     }
 
     //Left block element
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement leftHeader_BlockTitle;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement leftHeader_breadcrumbTitle;
 
     @FindBy(xpath = "//*[@id=\"layered_form\"]/div/div[10]/div/span") public WebElement filterHeaderPrice;
 
@@ -25,27 +25,24 @@ public class WomenPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"center_column\"]/div[3]/div[2]/div[2]") public WebElement showingResults;
 
 
-    //Submenus
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/span")  public WebElement submenu_DressesDropdown;
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/ul/li[3]/a")  public WebElement submenu_DressesDropdown_SummerDresses;
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/span")  public WebElement submenu_TopsDropdown;
-    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/ul/li[2]/a")  public WebElement submenu_TopsDropdown_Blouses;
+    // Submenus dropdown
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/span")  public WebElement submenu_Tops;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/ul/li[1]/a")  public WebElement submenu_Tops_Tshirts;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[1]/ul/li[2]/a")  public WebElement submenu_Tops_Blouses;
 
-    //View buttons and product elements
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/span")  public WebElement submenu_Dresses;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/ul/li[1]/a")  public WebElement submenu_Dresses_Casual;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/ul/li[2]/a")  public WebElement submenu_Dresses_Evening;
+    @FindBy(xpath = "//*[@id=\"categories_block_left\"]/div/ul/li[2]/ul/li[3]/a")  public WebElement submenu_Dresses_Summer;
+
+
+    // View buttons and product elements
     @FindBy(xpath = "//*[@id=\"subcategories\"]") public WebElement subCategories_div;
     @FindBy(xpath = "//*[@id=\"grid\"]/a/i") WebElement grid_btn;
     @FindBy(xpath = "//*[@id=\"list\"]/a/i") WebElement list_btn;
     @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Faded')]") public WebElement product_FadedShortSleeve;
     @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Blouse')]") public WebElement product_Blouse;
     @FindBy(xpath = "//a[@class=\"product-name\"][contains(text(),'Printed Dress')]") public WebElement product_PrintedDress;
-
-
-
-
-
-
-
-
 
 
 
@@ -67,9 +64,11 @@ public class WomenPage extends BasePage {
     }
 
     public void clickFilterDresses(){
+        isElementDisplayed(filterDresses);
         filterDresses.click();
     }
     public void clickFilterBlackColor(){
+        isElementDisplayed(filterColorBlack);
         filterColorBlack.click();
     }
     public void clickRemoveFilter(){

@@ -19,9 +19,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"columns\"]") public WebElement bannerContainer;
 
     //Main menu
-    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a") public WebElement mainMenuWomen;
-    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/a") public WebElement mainMenuDresses;
-    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a") public WebElement mainMenuTshirts;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a") public WebElement menuWomen;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/a") public WebElement menuDresses;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a") public WebElement menuTshirts;
 
     //Return to homepage
     @FindBy(className = "logo img-responsive") public WebElement backButtonHome;
