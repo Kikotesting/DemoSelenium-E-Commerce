@@ -13,32 +13,21 @@
 ## Purpose for the project
 
 Manipulate the DOM elements:
-- Filters
-- Sliders
-- Clickable, Visible and Invisible elements
-- Alert and active screens 
-
-Simulating Use cases End-To-End:
-- Create account
-- Login and Logout
-- Cannot login with invalid credentials
-- Hover effects 
-- Assertions and Order prioritization
+- Filters, Sliders, Clickable, Visible and Invisible elements
+- Alert and active screens, modals, Select dropdown menus, Hover effects
+- Assertions and order prioritization, Simulating use cases END-TO-END
 
 Screenshots after each test:
 - Report if the test passed or not passed, where is the problem!
 
 ## Covered test scenarios
 
-### 1.Subscribe for newsletters, 
-- TC.1 Search valid stocks data in searchBox field
-- TC.2 Subscribe your mail for newsletters
-- TC.3 Cannot subscribe exist mail for newsletters
-
-
-
-
-
+### 1.Subscribe for newsletters, Search functionality, Browse, 
+- TC.1 Search **valid** stocks data in searchBox field
+- TC.2 Search **invalid** stocks data in searchBox field
+- TC.3 Subscribe your mail for newsletters
+- TC.4 Cannot subscribe exist mail for newsletters
+- TC.5 User can browse banners with buttons on homepage
 
 
 ### 2.Create an Account, LogIn, LogOut

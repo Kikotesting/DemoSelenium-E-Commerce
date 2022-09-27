@@ -12,92 +12,8 @@ public class HomePageTests extends BaseTest {
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
 
-/*    @Test
-    @Order(1)
-    @DisplayName("Hover functionality - Main menus, ContactUs, SignIn, Popular, BestSellers, Products, Custom block, Footer social medias")
-    void performHoverEffect(){
-        homePage = new HomePage(driver);
+/*
 
-        hoverElement(homePage.signInButton);
-        Highlighter.highlightElement(driver, homePage.signInButton);
-        hoverElement(homePage.navRightContactUs);
-        Highlighter.highlightElement(driver, homePage.navRightContactUs);
-
-        scrollToElement(homePage.mainMenuTshirts);
-        hoverElement(homePage.mainMenuTshirts);
-        Highlighter.highlightElement(driver, homePage.mainMenuTshirts);
-        hoverElement(homePage.mainMenuWomen);
-        Highlighter.highlightElement(driver, homePage.mainMenuWomen);
-        hoverElement(homePage.mainMenuDresses);
-        Highlighter.highlightElement(driver, homePage.mainMenuDresses);
-
-        scrollToElement(homePage.filterButtonBestSellers);
-        hoverElement(homePage.filterButtonBestSellers);
-        Highlighter.highlightElement(driver, homePage.filterButtonBestSellers);
-        hoverElement(homePage.filterButtonPopular);
-        Highlighter.highlightElement(driver, homePage.filterButtonPopular);
-
-        scrollToElement(homePage.firstProduct);
-        hoverElement(homePage.firstProduct);
-        hoverElement(homePage.secondProduct);
-        hoverElement(homePage.thirdProduct);
-        hoverElement(homePage.fourthProduct);
-
-        scrollToElement(homePage.fifthProduct);
-        hoverElement(homePage.fifthProduct);
-        hoverElement(homePage.sixthProduct);
-        hoverElement(homePage.seventhProduct);
-
-        scrollToElement(homePage.cmsInfoBlock);
-        hoverElement(homePage.cmsInfoBlock);
-        Highlighter.highlightElement(driver, homePage.cmsInfoBlock);
-
-        scrollToElement(homePage.footerContainer);
-        hoverElement(homePage.facebook);
-        hoverElement(homePage.twitter);
-        hoverElement(homePage.youtube);
-        hoverElement(homePage.google_plus);
-    }
-    @Test
-    @Order(2)
-    @DisplayName("CallUs number is Visible on leftHeader-Navbar")
-    void verifyCallUsNumberIsDisplayed(){
-        homePage = new HomePage(driver);
-        String actualCallUsNumber = homePage.getTextFromElement(homePage.leftNavbarCallusNumber);
-
-        Highlighter.highlightElement(driver,homePage.leftNavbarCallusNumber);
-        Assertions.assertTrue(actualCallUsNumber.
-                        contains("Call us now: 0123-456-789"),
-                "Message is not correct!");
-    }
-    @Test
-    @Order(4)
-    @DisplayName("Search functionality - no result with invalid data")
-    void searchWithInvalidData(){
-
-        homePage = new HomePage(driver);
-        homePage.clickSearchBoxAndType("guhs");
-        homePage.submitSearch();
-        homePage.waitToBeVisible(homePage.incorrectResults, 5);
-        Assertions.assertTrue(homePage.getTextFromElement(homePage.incorrectResults)
-                        .contains("No results were found for your search"),
-                "Result is different!");
-    }
-    @Test
-    @Order(5)
-    @DisplayName("User can browse the banners with Next and Prev buttons")
-    void userCanBrowseBannersWithArrows() throws InterruptedException {
-        homePage = new HomePage(driver);
-        scrollToElement(homePage.bannerContainer);
-        homePage.clickBannerArrowNext();
-        //Thread sleep is set for UI testing purpose when check the test!
-        Thread.sleep(1000);
-        homePage.clickBannerArrowPrev();
-        Thread.sleep(1000);
-        homePage.clickBannerArrowNext();
-        Thread.sleep(1000);
-        homePage.clickBannerArrowNext();
-    }
     @Test
     @DisplayName("Validates dropdown filter by Highest price and Reference Highest price")
     void performDropdownFilter() throws InterruptedException {
@@ -185,10 +101,10 @@ public class HomePageTests extends BaseTest {
     @Test
     @Order(1)
     @DisplayName("Search valid stocks data in searchBox field")
-    void searchWithValidStocksData(){
+    void searchWithValidData_TC1(){
         homePage = new HomePage(driver);
 
-        homePage.setTextToField(homePage.searchBox,"dresses");
+        homePage.setTextToField(homePage.searchBox,"DRESSES");
         homePage.submitSearchText_btn();
         homePage.waitToBeVisible(homePage.lighterSearchWord, 5);
         homePage.waitToBeVisible(homePage.counterSearchResults, 5);
@@ -201,9 +117,22 @@ public class HomePageTests extends BaseTest {
                 "Result is different!");
     }
     @Test
+    @Order(1)
+    @DisplayName("Search invalid stocks data in searchBox field")
+    void searchWithInvalidData_TC2(){
+        homePage = new HomePage(driver);
+
+        homePage.setTextToField(homePage.searchBox,"gudsgsdghs");
+        homePage.submitSearchText_btn();
+        homePage.waitToBeVisible(homePage.incorrectResults, 5);
+        Assertions.assertTrue(homePage.getTextFromElement(homePage.incorrectResults)
+                        .contains("No results were found for your search"),
+                "Result is different!");
+    }
+    @Test
     @Order(2)
     @DisplayName("Subscribe your mail for newsletters")
-    void subscribeYourEmailForNewsLetters_TC2(){
+    void subscribeYourEmailForNewsLetters_TC3(){
         homePage = new HomePage(driver);
         // Go to the end on webPage
         homePage.scrollEndPage();
@@ -220,15 +149,31 @@ public class HomePageTests extends BaseTest {
     @Test
     @Order(2)
     @DisplayName("Cannot subscribe exist email for newsletters")
-    void cannotSubscribeExistEmail_TC3(){
+    void cannotSubscribeExistEmail_TC4(){
         homePage = new HomePage(driver);
         // Go to the end on webPage
         homePage.scrollEndPage();
-        // Second time when the test is executed will see the 'else' decision from the if-else element
         homePage.setTextToField(homePage.newsLetterInput, "mislead@mail.bg");
         homePage.submitNewsLetter_btn();
         homePage.waitToBeVisible(homePage.newsLetterMessage, 5);
         String registeredUser = "Newsletter : This email address is already registered.";
         Assertions.assertEquals(registeredUser,homePage.newsLetterMessage.getText(),"Wrong text!");
     }
+    @Test
+    @Order(3)
+    @DisplayName("User can browse the banners with Next and Prev buttons")
+    void userCanBrowseBannersWithButtons_TC5(){
+        homePage = new HomePage(driver);
+        homePage.scrollToElement(homePage.bannerContainer);
+        //Pause seconds are set for UI testing purpose when check the test!
+        homePage.clickBannerArrowNext();
+        homePage.pauseSeconds(1);
+        homePage.clickBannerArrowPrev();
+        homePage.pauseSeconds(1);
+        homePage.clickBannerArrowNext();
+        homePage.pauseSeconds(1);
+        homePage.clickBannerArrowNext();
+        // Assertions should be set about wich picture is on the screen
+    }
+
 }
