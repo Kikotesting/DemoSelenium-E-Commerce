@@ -5,7 +5,7 @@
 > #### Requirements:
 > - IntelliJ idea
 > - Java sdk 17+
-> - Java installed
+> - JUnit5 and Selenium dependencies
 > - Chrome installed
 > - Maven installed
 
@@ -13,23 +13,25 @@
 ## Purpose for the project
 
 Manipulate the DOM elements:
-- Filters
-- Sliders
-- Clickable, Visible and Invisible elements
-- Alert and active screens 
-
-Simulating Use cases End-To-End:
-- Create account
-- Login and Logout
-- Cannot login with invalid credentials
-- Hover effects 
-- Assertions and Order prioritization
+- Filters, Sliders, Clickable, Visible and Invisible elements
+- Alert and active screens, modals, Select dropdown menus, Hover effects
+- Assertions and order prioritization, Simulating use cases END-TO-END
 
 Screenshots after each test:
 - Report if the test passed or not passed, where is the problem!
 
-## Cover test scenarios
-### 1. Create an Account, LogIn, LogOut
+## Covered test scenarios
+
+### 1.Subscribe for newsletters, Search functionality, Browse banners, Card container checking 
+- TC.1 Search **valid** stocks data in searchBox field
+- TC.2 Search **invalid** stocks data in searchBox field
+- TC.3 Subscribe your mail for newsletters
+- TC.4 Cannot subscribe exist mail for newsletters
+- TC.5 User can browse banners with prev and next buttons on homepage
+- TC.6 Verify Shopping card container is it empty if the user doesn't add items
+
+
+### 2.Create an Account, LogIn, LogOut
 - TC.1 Create An account with NEW email
 - TC.2 Cannot create an account with exist email
 - TC.3 User can Login with **valid** email and password
@@ -39,6 +41,8 @@ Screenshots after each test:
 - TC.7 CANNOT Login with **invalid** email and password
 - TC.8 CANNOT Login with **empty** fields
 - TC.9 CANNOT create account without required fields
+
+
 
 
 
