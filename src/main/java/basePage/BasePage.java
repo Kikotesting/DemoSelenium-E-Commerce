@@ -28,10 +28,6 @@ public class BasePage {
 
 
     //Wait elements
-    public void waitUntilElementPresent(int waitSeconds){
-        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"center_column\"]/div[3]/div[2]/div[2]")));
-    }
     public void waitToBeVisible(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
         wait.pollingEvery(Duration.ofSeconds(1));
@@ -49,25 +45,11 @@ public class BasePage {
         wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
-    public  void waitToRefreshElement(WebElement element, int seconds,String text){
-        WebDriverWait wait = new WebDriverWait(driver, seconds);
-        wait.until(ExpectedConditions.textToBePresentInElement(element,text));
-    }
     public void pauseSeconds(Integer seconds){
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-    public void waitForJavascript(int maxWaitMillis, int pollDelimiter) throws InterruptedException {
-        double startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() < startTime + maxWaitMillis) {
-            String prevState = driver.getPageSource();
-            pauseSeconds(pollDelimiter); // <-- would need to wrap in a try catch
-            if (prevState.equals(driver.getPageSource())) {
-                return;
-            }
         }
     }
 
@@ -136,10 +118,6 @@ public class BasePage {
         Actions action = new Actions(driver);
         action.moveToElement(element).click().perform();
     }
-    public void clickElementJavascript(WebElement element){
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-    }
 
     //Input Fields
     public void setTextToField(WebElement element, String text){
@@ -147,10 +125,4 @@ public class BasePage {
         element.clear();
         element.sendKeys(text);
     }
-    public void clearTextToField(WebElement element){
-        isElementDisplayed(element);
-        element.clear();
-    }
-
-
 }

@@ -20,7 +20,8 @@ public class WomenPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement leftHeader_breadcrumbTitle;
 
     @FindBy(xpath = "//*[@id=\"layered_form\"]/div/div[10]/div/span") public WebElement leftSlider_header;
-    @FindBy(xpath = "//*[@id=\"layered_price_slider\"]/a[1]") public WebElement leftSlider_priceL;
+    private By leftSlider_rangeLeft = By.xpath("//*[@id=\"layered_price_range\"]");
+    public By leftSlider_priceLeft = By.xpath("//*[@id=\"layered_price_slider\"]/a[1]");
 
 
     // Results
@@ -77,16 +78,19 @@ public class WomenPage extends BasePage {
         isElementDisplayed(removeFilter);
         removeFilter.click();
     }
-    public void setSliderValue(double rightValue){
-        for (int i = 1; i <= rightValue ; i++) {
-            leftSlider_priceL.sendKeys(Keys.ARROW_RIGHT);
+    public String getSliderValue(){
+        return driver.findElement(leftSlider_rangeLeft).getText();
+    }
+    public void setSliderValueL(String value){
+        while(!getSliderValue().equals(value)){
+            driver.findElement(leftSlider_priceLeft).sendKeys(Keys.ARROW_RIGHT);
         }
     }
-    public void waitRefreshedResultText(int seconds, WebElement element, String text){
+
+    public void waitRefreshedResultText(WebElement element, int seconds,String text){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.
-                textToBe(By.xpath("//*[@id=\"center_column\"]/div[4]/div/div[2]")
-                        ,text)));
+                textToBePresentInElement(element,text)));
     }
 
 }

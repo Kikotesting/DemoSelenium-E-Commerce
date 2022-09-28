@@ -25,6 +25,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com/");
     }
+
     @AfterEach
     void afterEachTests() throws IOException {
         driver.manage().deleteAllCookies();
