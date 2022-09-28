@@ -19,9 +19,11 @@ public class WomenPage extends BasePage {
     //Left block element
     @FindBy(xpath = "//*[@id=\"categories_block_left\"]/h2") public WebElement leftHeader_breadcrumbTitle;
 
-    @FindBy(xpath = "//*[@id=\"layered_form\"]/div/div[10]/div/span") public WebElement filterHeaderPrice;
+    @FindBy(xpath = "//*[@id=\"layered_form\"]/div/div[10]/div/span") public WebElement leftSlider_header;
+    @FindBy(xpath = "//*[@id=\"layered_price_slider\"]/a[1]") public WebElement leftSlider_priceL;
 
 
+    // Results
     @FindBy(xpath = "//*[@id=\"center_column\"]/div[3]/div[2]/div[2]") public WebElement showingResults;
 
 
@@ -48,11 +50,11 @@ public class WomenPage extends BasePage {
 
 
     //Filter from catalogue
-    @FindBy(xpath = "//*[@id=\"enabled_filters\"]/span") public WebElement enabledFilters;
+    @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul/li") public WebElement enabledFilters;
     @FindBy(xpath = "//*[@id=\"ul_layered_category_0\"]/li[2]/label/a") public WebElement filterDresses;
     @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul/li/a") public WebElement removeFilter;
     @FindBy(xpath = "//*[@id=\"ul_layered_id_attribute_group_3\"]/li[3]/label/a") public WebElement filterColorBlack;
-    @FindBy(xpath = "//*[@id=\"layered_price_slider\"]/a[1]") public WebElement leftSliderPrice;
+
 
     public void clickGridViews(){
         isElementDisplayed(grid_btn);
@@ -75,9 +77,9 @@ public class WomenPage extends BasePage {
         isElementDisplayed(removeFilter);
         removeFilter.click();
     }
-    public void setSliderValue(String value){
-        for (int i = 1; i <= 10 ; i++) {
-            leftSliderPrice.sendKeys(Keys.ARROW_RIGHT);
+    public void setSliderValue(double rightValue){
+        for (int i = 1; i <= rightValue ; i++) {
+            leftSlider_priceL.sendKeys(Keys.ARROW_RIGHT);
         }
     }
     public void waitRefreshedResultText(int seconds, WebElement element, String text){

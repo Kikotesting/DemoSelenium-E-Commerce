@@ -89,27 +89,7 @@ public class WomenMenuTests extends BaseTest {
                 .contains("Showing 1 - 7 of 7 items"),"Does not removed");
     }
 
-    @Test
-    @Order(5)
-    @DisplayName("User can choose product by price Slider")
-    void sliderFilterByPrice() throws InterruptedException {
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
 
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.filterheaderPrice, 2);
-        scrollToElement(womenPage.filterheaderPrice);
-        womenPage.waitToBeClickable(womenPage.leftSliderPrice, 3);
-        Assertions.assertTrue(womenPage.leftSliderPrice.isDisplayed());
-        womenPage.setSliderValue("$30.80 - $53.00");
-        womenPage.waitToBeVisible(womenPage.showingResults,10);
-        womenPage.waitRefreshedResultText(15, womenPage.showingResults,"Showing 1 - 5 of 5 items");
-        scrollToElement(womenPage.showingResults);
-        String actualResult = womenPage.getTextFromElement(womenPage.showingResults);
-        Assertions.assertTrue(actualResult
-                .contains("Showing 1 - 5 of 5 items"),"Is not displayed all items!");
-
-    }
 
 */
 
@@ -171,5 +151,24 @@ public class WomenMenuTests extends BaseTest {
        womenPage.hoverElement(womenPage.product_PrintedDress);
        womenPage.pauseSeconds(1);
    }
+
+    @Test
+    @Order(5)
+    @DisplayName("User can choose product by price Slider")
+    void chooseItemWithSliderFilter_byPrice() {
+        homePage = new HomePage(driver);
+        womenPage = new WomenPage(driver);
+
+        homePage.menuWomen.click();
+        womenPage.waitToBeVisible(womenPage.leftSlider_header, 5);
+        womenPage.scrollToElement(womenPage.leftSlider_header);
+        // Waiting for slider to be clickable
+        womenPage.waitToBeClickable(womenPage.leftSlider_priceL, 3);
+        // Set slider to certain value
+        womenPage.setSliderValue(40);
+        womenPage.pauseSeconds(5);
+        // Verify showing result
+        womenPage.waitToRefreshElement(womenPage.showingResults,50,"Showing 1 - 2 of 2 items");
+    }
 
 }

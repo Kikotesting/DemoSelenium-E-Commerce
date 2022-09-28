@@ -30,7 +30,7 @@ public class BasePage {
     //Wait elements
     public void waitUntilElementPresent(int waitSeconds){
         WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"center_column\"]/div[3]/div[2]/div[2]")));
     }
     public void waitToBeVisible(WebElement element, int seconds) {
         final WebDriverWait wait = new WebDriverWait(driver, seconds);
