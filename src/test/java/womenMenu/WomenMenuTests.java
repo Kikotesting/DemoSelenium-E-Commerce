@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import pages.HomePage;
 import pages.WomenPage;
 
@@ -128,7 +129,7 @@ public class WomenMenuTests extends BaseTest {
        homePage = new HomePage(driver);
        womenPage = new WomenPage(driver);
 
-       homePage.clickElementJavascript(homePage.menuWomen);
+       homePage.menuWomen.click();
 
        womenPage.waitToBeVisible(womenPage.leftHeader_breadcrumbTitle, 10);
        womenPage.scrollToElement(womenPage.subCategories_div);
@@ -153,22 +154,28 @@ public class WomenMenuTests extends BaseTest {
    }
 
     @Test
-    @Order(5)
+    @Order(3)
     @DisplayName("User can choose product by price Slider")
-    void chooseItemWithSliderFilter_byPrice() {
+    void chooseItemWithSliderFilter_byPrice() throws InterruptedException {
         homePage = new HomePage(driver);
         womenPage = new WomenPage(driver);
 
         homePage.menuWomen.click();
         womenPage.waitToBeVisible(womenPage.leftSlider_header, 5);
         womenPage.scrollToElement(womenPage.leftSlider_header);
-        // Waiting for slider to be clickable
-        womenPage.waitToBeClickable(womenPage.leftSlider_priceL, 3);
+
         // Set slider to certain value
-        womenPage.setSliderValue(40);
-        womenPage.pauseSeconds(5);
-        // Verify showing result
-        womenPage.waitToRefreshElement(womenPage.showingResults,50,"Showing 1 - 2 of 2 items");
+        womenPage.setSliderValueL("$17.85 - $53.00");
+
+        // Check enabled filter by slider
+        womenPage.waitToBeVisible(womenPage.enabledFilters, 40);
+        womenPage.scrollToElement(womenPage.leftHeader_breadcrumbTitle);
+        System.out.println("Filters are set: "+ womenPage.enabledFilters.getText());
+        womenPage.pauseSeconds(2);
+
+        // Wait to refresh the text results after adding filter
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 5 of 5 items");
+        Assertions.assertEquals("Showing 1 - 5 of 5 items",womenPage.showingResults.getText());
     }
 
 }

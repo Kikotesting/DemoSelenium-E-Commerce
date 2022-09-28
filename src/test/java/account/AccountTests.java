@@ -40,7 +40,7 @@ public class AccountTests extends BaseTest {
         accPage.populatePersonalAddress("Kikcho","Kikchov","Lozenets, Sofia 1000","Sofia","75201","0877227711","mislead@reference3.bg");
         // Click register button
         accPage.scrollToElement(accPage.register_btn);
-        accPage.clickElementJavascript(accPage.register_btn);
+        accPage.register_btn.click();
         // Wait until welcome message for logged acc is displayed
         accPage.waitToBeVisible(accPage.welcomeMessage,10);
         accPage.scrollToElement(accPage.welcomeMessage);
@@ -188,7 +188,7 @@ public class AccountTests extends BaseTest {
         accPage.populatePersonalInfo("Kiko","Kikonev","misleadRequired@mail.bg","Proba123@");
         // Click register button
         accPage.scrollToElement(accPage.register_btn);
-        accPage.clickElementJavascript(accPage.register_btn);
+        accPage.register_btn.click();
         // Wait until error message is displayed for empty required fields
         accPage.waitToBeVisible(accPage.errorRequiredMessage,10);
         accPage.scrollToElement(accPage.errorRequiredMessage);
