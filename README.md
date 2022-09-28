@@ -42,6 +42,10 @@ Screenshots after each test:
 - TC.8 CANNOT Login with **empty** fields
 - TC.9 CANNOT create account without required fields
 
+### 3. Women Menu
+- TC.1 Click submenus dropdown and see the effects
+- TC.2 Change typeViews (Grid and List) and hover the elements
+
 
 
 

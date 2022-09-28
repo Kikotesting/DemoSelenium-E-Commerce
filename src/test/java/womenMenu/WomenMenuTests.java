@@ -90,24 +90,6 @@ public class WomenMenuTests extends BaseTest {
     }
 
     @Test
-    @Order(4)
-    @DisplayName("User can change typeViews on WomenPage")
-    void changeTypeViews(){
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.womenRightBlockTitle, 2);
-        scrollToElement(womenPage.viewTypes);
-        womenPage.clickListView();
-        hoverElement(womenPage.firstProductListView);
-        Highlighter.highlightElement(driver,womenPage.firstProductListView);
-        womenPage.clickGridView();
-        hoverElement(womenPage.firstProductGridView);
-        Highlighter.highlightElement(driver,womenPage.firstProductGridView);
-
-    }
-
-    @Test
     @Order(5)
     @DisplayName("User can choose product by price Slider")
     void sliderFilterByPrice() throws InterruptedException {
@@ -129,18 +111,65 @@ public class WomenMenuTests extends BaseTest {
 
     }
 
+*/
+
     @Test
-    @Order(6)
-    @DisplayName("Dropdown submenus effects")
-    void clickSubDropdownMenus(){
+    @Order(1)
+    @DisplayName("Submenus dropdown effects in WomenMENU")
+    void clickSubmenusDropdown_TC1(){
         homePage = new HomePage(driver);
         womenPage = new WomenPage(driver);
 
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.submenu_DressesDropdown.click();
-        womenPage.waitToBeVisible(womenPage.submenu_DressesDropdown_SummerDresses,3);
-        womenPage.submenu_TopsDropdown.click();
-        womenPage.waitToBeVisible(womenPage.submenu_TopsDropdown_Blouses,3);
-    }*/
+        homePage.menuWomen.click();
+
+        womenPage.scrollToElement(womenPage.leftHeader_breadcrumbTitle);
+        womenPage.submenu_Tops.click();
+        womenPage.waitToBeVisible(womenPage.submenu_Tops_Blouses, 5);
+        womenPage.hoverElement(womenPage.submenu_Tops_Blouses);
+        womenPage.pauseSeconds(1);
+        womenPage.waitToBeVisible(womenPage.submenu_Tops_Tshirts, 5);
+        womenPage.hoverElement(womenPage.submenu_Tops_Tshirts);
+        womenPage.pauseSeconds(1);
+        womenPage.submenu_Dresses.click();
+        womenPage.waitToBeVisible(womenPage.submenu_Dresses_Casual, 5);
+        womenPage.hoverElement(womenPage.submenu_Dresses_Casual);
+        womenPage.pauseSeconds(1);
+        womenPage.waitToBeVisible(womenPage.submenu_Dresses_Evening, 5);
+        womenPage.hoverElement(womenPage.submenu_Dresses_Evening);
+        womenPage.pauseSeconds(1);
+        womenPage.waitToBeVisible(womenPage.submenu_Dresses_Summer, 5);
+        womenPage.hoverElement(womenPage.submenu_Dresses_Summer);
+        womenPage.pauseSeconds(1);
+    }
+    @Test
+    @Order(2)
+    @DisplayName("User can change typeViews (Grid and List) and hover the elements")
+    void changeTypeViewsAndHoverElements_TC2(){
+       homePage = new HomePage(driver);
+       womenPage = new WomenPage(driver);
+
+       homePage.clickElementJavascript(homePage.menuWomen);
+
+       womenPage.waitToBeVisible(womenPage.leftHeader_breadcrumbTitle, 10);
+       womenPage.scrollToElement(womenPage.subCategories_div);
+       womenPage.pauseSeconds(2);
+       // List view and hover the elements
+       womenPage.clickListViews();
+       womenPage.scrollToElement(womenPage.product_FadedShortSleeve);
+       womenPage.hoverElement(womenPage.product_FadedShortSleeve);
+       womenPage.pauseSeconds(1);
+       womenPage.scrollToElement(womenPage.product_Blouse);
+       womenPage.hoverElement(womenPage.product_Blouse);
+       womenPage.pauseSeconds(1);
+
+       // Grid view and hover the elements
+       womenPage.clickGridViews();
+       womenPage.hoverElement(womenPage.product_FadedShortSleeve);
+       womenPage.pauseSeconds(1);
+       womenPage.hoverElement(womenPage.product_Blouse);
+       womenPage.pauseSeconds(1);
+       womenPage.hoverElement(womenPage.product_PrintedDress);
+       womenPage.pauseSeconds(1);
+   }
 
 }
