@@ -45,6 +45,7 @@ Screenshots after each test:
 ### 3. Women Menu
 - TC.1 Click submenus dropdown and see the effects
 - TC.2 Change typeViews (Grid and List) and hover the elements
+- TC.3 Choose product with slider filter_byPrice
 
 
 
