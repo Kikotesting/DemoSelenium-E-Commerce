@@ -22,12 +22,13 @@ Screenshots after each test:
 
 ## Covered test scenarios
 
-### 1.Subscribe for newsletters, Search functionality, Browse, 
+### 1.Subscribe for newsletters, Search functionality, Browse banners, Card container checking 
 - TC.1 Search **valid** stocks data in searchBox field
 - TC.2 Search **invalid** stocks data in searchBox field
 - TC.3 Subscribe your mail for newsletters
 - TC.4 Cannot subscribe exist mail for newsletters
-- TC.5 User can browse banners with buttons on homepage
+- TC.5 User can browse banners with prev and next buttons on homepage
+- TC.6 Verify Shopping card container is it empty if the user doesn't add items
 
 
 ### 2.Create an Account, LogIn, LogOut

@@ -39,16 +39,7 @@ public class HomePageTests extends BaseTest {
                         .contains("Printed Chiffon Dress")
                 ,"Not correct!");
     }
-    @Test
-    @Order(7)
-    @DisplayName("Verify cart container is empty until user doesn't add anything")
-    void verifyShoppingCartIsEmpty(){
-        homePage = new HomePage(driver);
-        shoppingCartPage = new ShoppingCartPage(driver);
-        homePage.clickCartButton();
-        shoppingCartPage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 3);
-        Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
-    }
+
     @Test
     @Order(8)
     @DisplayName("Verify user can add product in shopping cart")
@@ -174,6 +165,17 @@ public class HomePageTests extends BaseTest {
         homePage.pauseSeconds(1);
         homePage.clickBannerArrowNext();
         // Assertions should be set about wich picture is on the screen
+    }
+    @Test
+    @Order(4)
+    @DisplayName("Verify cart container is empty until user doesn't add items")
+    void verifyShoppingCartIsEmpty_TC6(){
+        homePage = new HomePage(driver);
+        shoppingCartPage = new ShoppingCartPage(driver);
+
+        homePage.clickCartButton();
+        shoppingCartPage.waitToBeVisible(shoppingCartPage.cartEmptyMessage, 3);
+        Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
     }
 
 }
