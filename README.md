@@ -46,6 +46,9 @@ Screenshots after each test:
 - TC.1 Click submenus dropdown and see the effects
 - TC.2 Change typeViews (Grid and List) and hover the elements
 - TC.3 Choose product with slider filter_byPrice
+- TC.4 User can add one filter from categories
+- TC.5 User can add more than one filter from categories
+- TC.6 User can remove added filter
 
 
 

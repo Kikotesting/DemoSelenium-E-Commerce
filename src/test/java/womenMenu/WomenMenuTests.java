@@ -1,98 +1,16 @@
 package womenMenu;
 
 import baseTest.BaseTest;
-import custom.Highlighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import pages.HomePage;
 import pages.WomenPage;
 
 public class WomenMenuTests extends BaseTest {
     HomePage homePage;
     WomenPage womenPage;
-
-   /* @Test
-    @Order(1)
-    @DisplayName("User can enable Filter and expect specific result")
-    void selectFiltersForSpecificResult() throws InterruptedException {
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
-
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.womenRightBlockTitle, 2);
-
-        scrollToElement(womenPage.womenRightBlockTitle);
-        womenPage.waitToBeVisible(womenPage.showingResults,3);
-        String actualText = womenPage.getTextFromElement(womenPage.showingResults);
-        Assertions.assertTrue(actualText
-                .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
-        womenPage.clickFilterDresses();
-        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
-        scrollToElement(womenPage.showingResults);
-        Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
-                .contains("Showing 1 - 5 of 5 items"),"Is not displayed correct counter!");
-
-    }
-
-    @Test
-    @Order(2)
-    @DisplayName("User can remove Filter")
-    void chooseOneFilterAndRemoveIt() throws InterruptedException {
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
-
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.womenRightBlockTitle, 2);
-        scrollToElement(womenPage.womenRightBlockTitle);
-        womenPage.waitToBeVisible(womenPage.showingResults,3);
-        String actualText = womenPage.getTextFromElement(womenPage.showingResults);
-        Assertions.assertTrue(actualText
-                .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
-        womenPage.clickFilterDresses();
-        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 5 of 5 items");
-        scrollToElement(womenPage.womenRightBlockTitle);
-        womenPage.waitToBeVisible(womenPage.enabledFilters,4);
-        womenPage.clickRemoveFilter();
-        womenPage.waitRefreshedResultText(5, womenPage.showingResults,"Showing 1 - 7 of 7 items");
-        Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
-                .contains("Showing 1 - 7 of 7 items"),"Does not removed");
-
-    }
-
-    @Test
-    @Order(3)
-    @DisplayName("User can remove more than one Filter")
-    void chooseMoreFiltersAndRemoveIt() throws InterruptedException {
-        homePage = new HomePage(driver);
-        womenPage = new WomenPage(driver);
-
-        homePage.clickElement(homePage.mainMenuWomen);
-        womenPage.waitToBeVisible(womenPage.womenRightBlockTitle, 2);
-        scrollToElement(womenPage.womenRightBlockTitle);
-        womenPage.waitToBeVisible(womenPage.showingResults,3);
-        String actualText = womenPage.getTextFromElement(womenPage.showingResults);
-        Assertions.assertTrue(actualText
-                .contains("Showing 1 - 7 of 7 items"),"Is not displayed all items!");
-        womenPage.clickFilterDresses(); // first filter
-        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 5 of 5 items");
-        womenPage.clickFilterBlackColor();
-        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 1 of 1 items");
-        womenPage.waitToBeVisible(womenPage.enabledFilters,4);
-        womenPage.clickRemoveFilter(); // remove first filter
-        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 2 of 2 items");
-        womenPage.clickRemoveFilter(); // remove second filter
-        womenPage.waitRefreshedResultText(10, womenPage.showingResults,"Showing 1 - 7 of 7 items");
-        Assertions.assertTrue(womenPage.getTextFromElement(womenPage.showingResults)
-                .contains("Showing 1 - 7 of 7 items"),"Does not removed");
-    }
-
-
-
-*/
 
     @Test
     @Order(1)
@@ -156,7 +74,7 @@ public class WomenMenuTests extends BaseTest {
     @Test
     @Order(3)
     @DisplayName("User can choose product by price Slider")
-    void chooseItemWithSliderFilter_byPrice() throws InterruptedException {
+    void chooseItemWithSliderFilterByPrice_TC3() throws InterruptedException {
         homePage = new HomePage(driver);
         womenPage = new WomenPage(driver);
 
@@ -177,5 +95,97 @@ public class WomenMenuTests extends BaseTest {
         womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 5 of 5 items");
         Assertions.assertEquals("Showing 1 - 5 of 5 items",womenPage.showingResults.getText());
     }
+    @Test
+    @Order(4)
+    @DisplayName("User can add one filter from categories -> 'Dresses'")
+    void markOneFilterFromCategories_TC4() throws InterruptedException {
+        homePage = new HomePage(driver);
+        womenPage = new WomenPage(driver);
+
+        homePage.menuWomen.click();
+        womenPage.waitToBeVisible(womenPage.leftHeader_breadcrumbTitle, 5);
+        womenPage.scrollToElement(womenPage.leftHeader_breadcrumbTitle);
+        womenPage.waitToBeVisible(womenPage.showingResults,5);
+        // Mark filter 'Dresses'
+        womenPage.clickFilterDresses();
+        // Check enabled filter
+        womenPage.waitToBeVisible(womenPage.enabledFilters, 40);
+        womenPage.getListElements(womenPage.enabledFiltersList);
+        System.out.println("Filters are set: "+ womenPage.enabledFiltersList.getText());
+        womenPage.pauseSeconds(2);
+        // Wait to refresh the text results after adding filter
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 5 of 5 items");
+        Assertions.assertEquals("Showing 1 - 5 of 5 items",womenPage.showingResults.getText());
+    }
+    @Test
+    @Order(4)
+    @DisplayName("User can add more than one filter 'Dresses' and 'Polyester'")
+    void markMoreThanOneFilterFromCatalogue_TC5() throws InterruptedException {
+        homePage = new HomePage(driver);
+        womenPage = new WomenPage(driver);
+
+        homePage.menuWomen.click();
+        womenPage.waitToBeVisible(womenPage.leftHeader_breadcrumbTitle, 5);
+        womenPage.scrollToElement(womenPage.leftHeader_breadcrumbTitle);
+        womenPage.waitToBeVisible(womenPage.showingResults,5);
+
+        // Mark filter 'Dresses'
+        womenPage.clickFilterDresses();
+        // Check enabled filter
+        womenPage.waitToBeVisible(womenPage.enabledFilters, 40);
+        womenPage.getListElements(womenPage.enabledFiltersList);
+        // Print which filters are set
+        System.out.println("Filters are set: "+ womenPage.enabledFiltersList.getText());
+        womenPage.pauseSeconds(2);
+        // Wait to refresh the text results after adding filter
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 5 of 5 items");
+        Assertions.assertEquals("Showing 1 - 5 of 5 items",womenPage.showingResults.getText());
+
+        // Mark filter 'Polyester'
+        womenPage.clickFilterPolyester();
+        // Check enabled filter
+        womenPage.waitToBeVisible(womenPage.enabledFilters, 40);
+        // Wait to refresh the text results after adding more filters
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 2 of 2 items");
+        Assertions.assertEquals("Showing 1 - 2 of 2 items",womenPage.showingResults.getText());
+        // Print which filters are set
+        womenPage.getListElements(womenPage.enabledFiltersList);
+        System.out.println("Filters are set: "+ womenPage.enabledFiltersList.getText());
+        womenPage.pauseSeconds(2);
+    }
+    @Test
+    @Order(5)
+    @DisplayName("User can remove added filter")
+    void chooseOneFilterAndRemoveIt_TC6(){
+        homePage.menuWomen.click();
+        womenPage.waitToBeVisible(womenPage.leftHeader_breadcrumbTitle, 5);
+        womenPage.scrollToElement(womenPage.leftHeader_breadcrumbTitle);
+        womenPage.waitToBeVisible(womenPage.showingResults,5);
+        // Mark filter 'Dresses'
+        womenPage.clickFilterDresses();
+        // Check enabled filter
+        womenPage.waitToBeVisible(womenPage.enabledFilters, 40);
+        womenPage.getListElements(womenPage.enabledFiltersList);
+        System.out.println("Filters are set: "+ womenPage.enabledFiltersList.getText());
+        womenPage.pauseSeconds(2);
+        // Wait to refresh the text results after adding filter
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 5 of 5 items");
+        Assertions.assertEquals("Showing 1 - 5 of 5 items",womenPage.showingResults.getText());
+        // Remove the filter
+        womenPage.clickRemoveFilter();
+        // Wait to enabled filter form disappear
+        womenPage.waitToBeInvisible(womenPage.enabledFilters, 40);
+        // Wait to refresh the text results after adding filter
+        womenPage.waitRefreshedResultText(womenPage.showingResults, 40,"Showing 1 - 7 of 7 items");
+        Assertions.assertEquals("Showing 1 - 7 of 7 items",womenPage.showingResults.getText());
+    }
+    @Test
+    @Order(5)
+    @DisplayName("User can remove more than one added filter")
+    void chooseMoreFiltersAndRemoveIt(){
+        // in progress
+    }
+
+
 
 }
