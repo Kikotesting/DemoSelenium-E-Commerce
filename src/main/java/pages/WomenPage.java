@@ -51,10 +51,12 @@ public class WomenPage extends BasePage {
 
 
     //Filter from catalogue
-    @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul/li") public WebElement enabledFilters;
+    @FindBy(xpath = "//*[@id=\"enabled_filters\"]") public WebElement enabledFilters;
+    @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul") public WebElement enabledFiltersList;
     @FindBy(xpath = "//*[@id=\"ul_layered_category_0\"]/li[2]/label/a") public WebElement filterDresses;
+    @FindBy(xpath = "//*[@id=\"layered_id_feature_1\"]") public WebElement filterPolyester;
     @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul/li/a") public WebElement removeFilter;
-    @FindBy(xpath = "//*[@id=\"ul_layered_id_attribute_group_3\"]/li[3]/label/a") public WebElement filterColorBlack;
+
 
 
     public void clickGridViews(){
@@ -70,10 +72,11 @@ public class WomenPage extends BasePage {
         isElementDisplayed(filterDresses);
         filterDresses.click();
     }
-    public void clickFilterBlackColor(){
-        isElementDisplayed(filterColorBlack);
-        filterColorBlack.click();
+    public void clickFilterPolyester(){
+        isElementDisplayed(filterPolyester);
+        filterPolyester.click();
     }
+
     public void clickRemoveFilter(){
         isElementDisplayed(removeFilter);
         removeFilter.click();
