@@ -49,6 +49,7 @@ Screenshots after each test:
 - TC.4 User can add one filter from categories
 - TC.5 User can add more than one filter from categories
 - TC.6 User can remove added filter
+- TC.7 User can remove more than one added filter
 
 
 
