@@ -68,7 +68,7 @@ public class BasePage {
         }
     }
     public void clickOptionFromList(WebElement element,String option){
-        List<WebElement> links = element.findElements(By.tagName("p"));
+        List<WebElement> links = element.findElements(By.tagName("i"));
         for (int i = 0; i < links.size(); i++){
             if (links.get(i).getText().equals(option)) {
                 System.out.println(links.get(i).getText());
@@ -76,6 +76,7 @@ public class BasePage {
             }
         }
     }
+
 
     //Scroll elements
     public void scrollToElement(WebElement element){

@@ -1,6 +1,7 @@
 package pages;
 
 import basePage.BasePage;
+import custom.Highlighter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class WomenPage extends BasePage {
     public WomenPage(WebDriver driver){
@@ -55,7 +58,10 @@ public class WomenPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul") public WebElement enabledFiltersList;
     @FindBy(xpath = "//*[@id=\"ul_layered_category_0\"]/li[2]/label/a") public WebElement filterDresses;
     @FindBy(xpath = "//*[@id=\"layered_id_feature_1\"]") public WebElement filterPolyester;
-    @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul/li/a") public WebElement removeFilter;
+    @FindBy(xpath = "//*[@class='icon-remove'][1]") public WebElement removeFilter;
+
+
+
 
 
 
@@ -76,11 +82,14 @@ public class WomenPage extends BasePage {
         isElementDisplayed(filterPolyester);
         filterPolyester.click();
     }
-
-    public void clickRemoveFilter(){
-        isElementDisplayed(removeFilter);
-        removeFilter.click();
+    public void kiko(){
+        List<WebElement> filters  = driver.findElements(By.xpath("//*[@class='icon-remove']"));
+        for (int i = 0; i < filters.size(); i++){
+            filters.get(i).click();
+            pauseSeconds(5);
+        }
     }
+
     public String getSliderValue(){
         return driver.findElement(leftSlider_rangeLeft).getText();
     }
