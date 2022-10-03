@@ -29,6 +29,7 @@ Screenshots after each test:
 - TC.4 Cannot subscribe exist mail for newsletters
 - TC.5 User can browse banners with prev and next buttons on homepage
 - TC.6 Verify Shopping card container is it empty if the user doesn't add items
+- TC.7 Perform Dropdown filter and check first element from A-Z
 
 
 ### 2.Create an Account, LogIn, LogOut
@@ -50,6 +51,9 @@ Screenshots after each test:
 - TC.5 User can add more than one filter from categories
 - TC.6 User can remove added filter
 - TC.7 User can remove more than one added filter
+
+### 4. Dresses Menu
+- TC.1 User can add product in shopping cart
 
 
 

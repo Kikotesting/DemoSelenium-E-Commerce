@@ -15,29 +15,6 @@ public class HomePageTests extends BaseTest {
 /*
 
     @Test
-    @Order(8)
-    @DisplayName("Verify user can add product in shopping cart")
-    void verifyAddProductInShoppingCart(){
-        homePage = new HomePage(driver);
-        shoppingCartPage = new ShoppingCartPage(driver);
-
-        homePage.waitToBeVisible(homePage.firstProduct, 2);
-        hoverElement(homePage.firstProduct);
-        homePage.waitToBeVisible(homePage.addToCart_FirstProduct, 2);
-        homePage.clickElement(homePage.addToCart_FirstProduct);
-        homePage.waitToBeVisible(homePage.alertAddProduct, 5);
-        driver.switchTo().activeElement();
-        String actualAddText = homePage.getTextFromElement(homePage.successAddProductText);
-        Assertions.assertEquals("Product successfully added to your shopping cart", actualAddText);
-        homePage.clickElement(homePage.processToCheckOut);
-        String actualProductText = shoppingCartPage.getTextFromElement(shoppingCartPage.Description);
-        String actualProductPageHeader = shoppingCartPage.getTextFromElement(shoppingCartPage.yourShoppingCart);
-        Assertions.assertEquals("Your shopping cart", actualProductPageHeader);
-        scrollToElement(shoppingCartPage.Summary);
-        Assertions.assertEquals("Faded Short Sleeve T-shirts", actualProductText);
-        shoppingCartPage.clickContinueShopping();
-    }
-    @Test
     @Order(9)
     @DisplayName("Verify user can add product in shopping cart and remove it")
     void verifyAddProductInShoppingCartAndRemove(){
@@ -155,7 +132,7 @@ public class HomePageTests extends BaseTest {
     @Test
     @Order(5)
     @DisplayName("Validates dropdown filter from A to Z ordered Items")
-    void performDropdownFilter(){
+    void performDropdownFilter_TC7(){
         homePage = new HomePage(driver);
 
         // Start searching products
@@ -171,8 +148,6 @@ public class HomePageTests extends BaseTest {
         homePage.waitToBeVisible(homePage.productA_Z_FadedShortSleeve, 10);
         homePage.getListElements(homePage.listA_Z_allItems);
         Assertions.assertEquals(homePage.productA_Z_FirstElement.getText(),"Blouse");
-        Assertions.assertEquals(homePage.productA_Z_SecondElement.getText(),"\n" +
-                "\t\t\t\t\t\t\tFaded Short Sleeve T-shirts\n" +
-                "\t\t\t\t\t\t");
     }
+
 }

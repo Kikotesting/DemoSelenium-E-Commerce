@@ -50,10 +50,6 @@ public class HomePage extends BasePage {
     @FindBy(className = "bx-next") public WebElement bannerNext;
     @FindBy(className = "bx-prev") public WebElement bannerPrev;
 
-    //Filters
-    @FindBy(className = "blockbestsellers") public WebElement filterButtonBestSellers;
-    @FindBy(className = "homefeatured") public WebElement filterButtonPopular;
-
 
     // Sort by Highest Price then Reference Highest
     @FindBy(xpath = "//*[@id=\"grid\"]/a/i") public WebElement  grid_btn;
@@ -63,7 +59,6 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div/div[2]/h5/a") public WebElement productA_Z_FirstElement;
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]") public WebElement productA_Z_FadedShortSleeve;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]/div/div/div[2]/h5/a") public WebElement productA_Z_SecondElement;
     @FindBy(xpath = "//*[@class='product_list row list']") public WebElement listA_Z_allItems;
 
 

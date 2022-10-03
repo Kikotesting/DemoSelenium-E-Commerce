@@ -111,7 +111,7 @@ public class BasePage {
         selectElement(element).selectByVisibleText(valueText);
     }
     public void selectByValueElement(WebElement element, String value){
-        selectElement(element).selectByVisibleText(value);
+        selectElement(element).selectByValue(value);
     }
     public void selectByIndexElement(WebElement element, int index){
         selectElement(element).selectByIndex(index);
