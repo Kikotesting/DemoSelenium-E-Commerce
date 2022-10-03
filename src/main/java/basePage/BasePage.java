@@ -111,8 +111,7 @@ public class BasePage {
     //Hover element
     public void hoverElement(WebElement element) {
         Actions action = new Actions(driver);
-        action.moveToElement(element);
-        action.build().perform();
+        action.moveToElement(element).build().perform();
     }
     public void hoverElementClick(WebElement element){
         Actions action = new Actions(driver);
