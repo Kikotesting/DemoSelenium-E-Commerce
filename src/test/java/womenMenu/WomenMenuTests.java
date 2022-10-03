@@ -1,6 +1,7 @@
 package womenMenu;
 
 import baseTest.BaseTest;
+import custom.Highlighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -226,7 +227,6 @@ public class WomenMenuTests extends BaseTest {
         Assertions.assertEquals("Showing 1 - 7 of 7 items",womenPage.showingResults.getText());
         System.out.println("Removed again");
     }
-
 
 
 }

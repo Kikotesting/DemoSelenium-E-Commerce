@@ -56,9 +56,16 @@ public class HomePage extends BasePage {
 
 
     // Sort by Highest Price then Reference Highest
+    @FindBy(xpath = "//*[@id=\"grid\"]/a/i") public WebElement  grid_btn;
+    @FindBy(xpath = "//*[@id=\"list\"]/a/i") public WebElement list_btn;
     @FindBy(id = "selectProductSort") public WebElement sortDropdown;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/h5/a") public WebElement productOne;
-    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]/div/div[2]/h5/a") public WebElement productTwo;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]") public WebElement productA_Z_Blouse;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div/div[2]/h5/a") public WebElement productA_Z_FirstElement;
+
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]") public WebElement productA_Z_FadedShortSleeve;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[2]/div/div/div[2]/h5/a") public WebElement productA_Z_SecondElement;
+    @FindBy(xpath = "//*[@class='product_list row list']") public WebElement listA_Z_allItems;
+
 
     @FindBy(id = "cmsinfo_block") public WebElement cmsInfoBlock;
     @FindBy(className = "footer-container") public WebElement footerContainer;

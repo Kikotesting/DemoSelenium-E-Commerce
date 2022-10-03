@@ -15,32 +15,6 @@ public class HomePageTests extends BaseTest {
 /*
 
     @Test
-    @DisplayName("Validates dropdown filter by Highest price and Reference Highest price")
-    void performDropdownFilter() throws InterruptedException {
-        homePage = new HomePage(driver);
-        homePage.clickSearchBoxAndType("Dress");
-        homePage.submitSearch();
-        scrollToElement(homePage.sortDropdown);
-        Highlighter.highlightElement(driver, homePage.sortDropdown);
-        homePage.clickSortDropdown();
-        homePage.selectValueHighestFirst();
-        homePage.pauseSeconds(3);
-        Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
-                        .contains("Printed Dress")
-                ,"Not correct!");
-        Assertions.assertTrue(homePage.getTextFromElement(homePage.productTwo)
-                        .contains("Summer Dress")
-                ,"Not correct!");
-        homePage.clickSortDropdown();
-        Highlighter.highlightElement(driver, homePage.sortDropdown);
-        homePage.selectValueReferenceHighestFirst();
-        homePage.pauseSeconds(3);
-        Assertions.assertTrue(homePage.getTextFromElement(homePage.productOne)
-                        .contains("Printed Chiffon Dress")
-                ,"Not correct!");
-    }
-
-    @Test
     @Order(8)
     @DisplayName("Verify user can add product in shopping cart")
     void verifyAddProductInShoppingCart(){
@@ -178,4 +152,27 @@ public class HomePageTests extends BaseTest {
         Assertions.assertEquals("Your shopping cart is empty.",homePage.getTextFromElement(shoppingCartPage.cartEmptyMessage));
     }
 
+    @Test
+    @Order(5)
+    @DisplayName("Validates dropdown filter from A to Z ordered Items")
+    void performDropdownFilter(){
+        homePage = new HomePage(driver);
+
+        // Start searching products
+        homePage.setTextToField(homePage.searchBox, "Dresses");
+        homePage.submitSearchText_btn();
+        // Scroll to dropdown filter
+        homePage.scrollToElement(homePage.sortDropdown);
+        Highlighter.highlightElement(driver, homePage.sortDropdown);
+        homePage.selectElement(homePage.sortDropdown);
+        homePage.selectByValueElement(homePage.sortDropdown, "name:asc");
+        homePage.list_btn.click();
+        homePage.waitToBeVisible(homePage.productA_Z_Blouse, 10);
+        homePage.waitToBeVisible(homePage.productA_Z_FadedShortSleeve, 10);
+        homePage.getListElements(homePage.listA_Z_allItems);
+        Assertions.assertEquals(homePage.productA_Z_FirstElement.getText(),"Blouse");
+        Assertions.assertEquals(homePage.productA_Z_SecondElement.getText(),"\n" +
+                "\t\t\t\t\t\t\tFaded Short Sleeve T-shirts\n" +
+                "\t\t\t\t\t\t");
+    }
 }

@@ -76,6 +76,14 @@ public class BasePage {
             }
         }
     }
+    public void getOptionFromList(WebElement element,String option){
+        List<WebElement> links = element.findElements(By.tagName("a"));
+        for (int i = 0; i < links.size(); i++){
+            if (links.get(i).getText().equals(option)) {
+                System.out.println(links.get(i).getText());
+            }
+        }
+    }
 
 
     //Scroll elements
