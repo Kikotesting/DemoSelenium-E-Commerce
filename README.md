@@ -54,7 +54,6 @@ Screenshots after each test:
 
 ### 4. Dresses Menu
 - TC.1 User can add product in shopping cart
-- TC.2 User can explore the product with more details via 'More' btn
 
 
 
