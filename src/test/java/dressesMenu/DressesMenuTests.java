@@ -110,7 +110,7 @@ public class DressesMenuTests extends BaseTest {
     @Test
     @Order(2)
     @DisplayName("User can look the product by more details via More button")
-    void exploreItemWithMoreButton(){
+    void exploreProductWith_MoreButton_TC2(){
         homePage = new HomePage(driver);
         dressPage = new DressesPage(driver);
         productPage = new ProductPage(driver);
