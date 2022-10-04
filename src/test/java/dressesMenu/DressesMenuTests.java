@@ -1,6 +1,7 @@
 package dressesMenu;
 
 import baseTest.BaseTest;
+import custom.Highlighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -16,7 +17,20 @@ public class DressesMenuTests extends BaseTest {
     AlertPage alertPage;
     AuthenticationPage authPage;
     AccountPage accPage;
-
+    ProductPage productPage;
+    public void defaultLogin(){
+        homePage = new HomePage(driver);
+        authPage = new AuthenticationPage(driver);
+        accPage = new AccountPage(driver);
+        //Sing in with valid credentials
+        homePage.signIn_btn.click();
+        authPage.setRegisteredMail("mislead@mail.bg");
+        authPage.setRegisteredPass("Kiko123@");
+        authPage.clickSignInButton();
+        accPage.waitToBeVisible(accPage.welcomeMessage,10);
+        String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
+        Assertions.assertEquals(actualMessageAfterCreateAccount,accPage.getTextFromElement(accPage.welcomeMessage));
+    }
     @Test
     @Order(1)
     @DisplayName("Verify user can add product in shopping cart")
@@ -29,13 +43,7 @@ public class DressesMenuTests extends BaseTest {
         accPage = new AccountPage(driver);
 
         //Sing in with valid credentials
-        homePage.signIn_btn.click();
-        authPage.setRegisteredMail("mislead@mail.bg");
-        authPage.setRegisteredPass("Kiko123@");
-        authPage.clickSignInButton();
-        accPage.waitToBeVisible(accPage.welcomeMessage,10);
-        String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
-        Assertions.assertEquals(actualMessageAfterCreateAccount,accPage.getTextFromElement(accPage.welcomeMessage));
+        defaultLogin();
 
         // Go to Dress menu
         homePage.menuDresses.click();
@@ -97,6 +105,44 @@ public class DressesMenuTests extends BaseTest {
         shopCartPage.waitToBeVisible(shopCartPage.ordersTable_header, 10);
         shopCartPage.scrollToElement(shopCartPage.ordersTable_header);
         Assertions.assertEquals("ORDER HISTORY",shopCartPage.ordersTable_header.getText());
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("User can look the product by more details via More button")
+    void exploreItemWithMoreButton(){
+        homePage = new HomePage(driver);
+        dressPage = new DressesPage(driver);
+        productPage = new ProductPage(driver);
+
+        //login
+        defaultLogin();
+        homePage.menuDresses.click();
+        // scroll to element
+        homePage.list_btn.click();
+        dressPage.scrollToElement(dressPage.item_PrintedChiffonDress);
+        dressPage.more_btn_PrintedChiffon.click();
+        // scroll to product view and check the text and price
+        productPage.scrollToElement(productPage.productPage_breadcrumb);
+        String actualProductHeader = "Printed Chiffon Dress";
+        Highlighter.highlightElement(driver,productPage.productHeader);
+        Assertions.assertEquals(productPage.productHeader.getText(),actualProductHeader);
+        String actualProductPrice = "$16.40";
+        Highlighter.highlightElement(driver,productPage.productPrice);
+        Assertions.assertEquals(productPage.productPrice.getText(),actualProductPrice);
+        // Select color and M size
+        productPage.selectByIndexElement(productPage.productSize_dropdown, 1);
+        Highlighter.highlightElement(driver,productPage.productSize_dropdown);
+        productPage.pauseSeconds(2);
+        productPage.productColor_green.click();
+        productPage.pauseSeconds(2);
+        //Click zoom view
+        productPage.productZoom_btn.click();
+        driver.switchTo().activeElement();
+        productPage.pauseSeconds(2);
+        // Close the zoom view
+        productPage.productZoom_btnClose.click();
+        productPage.pauseSeconds(2);
     }
 
 }
