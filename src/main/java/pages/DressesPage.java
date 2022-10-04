@@ -24,6 +24,8 @@ public class DressesPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"enabled_filters\"]/ul") public WebElement enabledFiltersList;
     @FindBy(xpath = "//*[@id=\"layered_id_feature_5\"]") public WebElement cottonFilter;
     @FindBy(xpath = "//*[@class=\"button ajax_add_to_cart_button btn btn-default\"]") public WebElement addCart_btn_PrintedDress;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[5]/div/div/div[3]/div/div[1]/span[1]") public WebElement item_PrintedChiffonDress;
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[5]/div/div/div[3]/div/div[2]/a[2]/span") public WebElement more_btn_PrintedChiffon;
     public void waitRefreshedResultText(WebElement element, int seconds,String text){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.

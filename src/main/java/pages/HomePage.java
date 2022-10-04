@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
 
@@ -15,8 +14,6 @@ public class HomePage extends BasePage {
         super (driver);
         PageFactory.initElements(driver,this);
     }
-
-
 
     //Main menus
     @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a") public WebElement menuWomen;
