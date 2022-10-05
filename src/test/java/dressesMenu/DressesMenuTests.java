@@ -31,10 +31,54 @@ public class DressesMenuTests extends BaseTest {
         String actualMessageAfterCreateAccount = "Welcome to your account. Here you can manage all of your personal information and orders.";
         Assertions.assertEquals(actualMessageAfterCreateAccount,accPage.getTextFromElement(accPage.welcomeMessage));
     }
+
     @Test
     @Order(1)
     @DisplayName("Verify user can add product in shopping cart")
     void verifyAddProductInShoppingCart_TC1(){
+        homePage = new HomePage(driver);
+        dressPage = new DressesPage(driver);
+        shopCartPage = new ShoppingCartPage(driver);
+        alertPage = new AlertPage(driver);
+
+        //Sing in with valid credentials
+        defaultLogin();
+
+        // Go to Dress menu
+        homePage.menuDresses.click();
+        dressPage.scrollToElement(dressPage.subcategoriesMenu_Header);
+        //Mark cotton filter, and one product left on the page
+        dressPage.cottonFilter.click();
+        dressPage.waitToBeVisible(dressPage.showingResults, 10);
+        dressPage.waitToBeVisible(dressPage.enabledFilters, 30);
+        dressPage.getListElements(dressPage.enabledFiltersList);
+        System.out.println("Filters are set: "+ dressPage.enabledFiltersList.getText());
+        dressPage.waitRefreshedResultText(dressPage.showingResults, 40,"Showing 1 - 1 of 1 items");
+        Assertions.assertEquals("Showing 1 - 1 of 1 items",dressPage.showingResults.getText());
+        // Add to shopping cart
+        dressPage.list_btn.click();
+        dressPage.waitToBeVisible(dressPage.addCart_btn_PrintedDress,10);
+        dressPage.addCart_btn_PrintedDress.click();
+
+        // Wait to be visible alert page for adding product
+        alertPage.waitToBeVisible(alertPage.addingProduct_layer, 10);
+        driver.switchTo().activeElement();
+        // Check the product is added and wait proceed checkout
+        String actualAddTextOne = alertPage.getTextFromElement(alertPage.headerOne_SuccessAddProduct);
+        Assertions.assertEquals("Product successfully added to your shopping cart", actualAddTextOne);
+        String actualAddTextTwo = alertPage.getTextFromElement(alertPage.headerTwo_SuccessAddProduct);
+        Assertions.assertEquals("There is 1 item in your cart.", actualAddTextTwo);
+
+        // Go to Shopping cart page
+        alertPage.proceed_btn.click();
+        shopCartPage.waitToBeVisible(shopCartPage.tableWith_product,10);
+        shopCartPage.scrollToElement(shopCartPage.tableWith_product);
+    }
+
+    @Test
+    @Order(1)
+    @DisplayName("Verify user can add product in shopping cart and proceed to checkout")
+    void verifyAddProductInShoppingCart_TC2(){
         homePage = new HomePage(driver);
         dressPage = new DressesPage(driver);
         shopCartPage = new ShoppingCartPage(driver);
@@ -109,8 +153,8 @@ public class DressesMenuTests extends BaseTest {
 
     @Test
     @Order(2)
-    @DisplayName("User can look the product by more details via More button")
-    void exploreProductWith_MoreButton_TC2(){
+    @DisplayName("User can explore the product by more details via More button")
+    void exploreProductWith_MoreButton_TC3(){
         homePage = new HomePage(driver);
         dressPage = new DressesPage(driver);
         productPage = new ProductPage(driver);
