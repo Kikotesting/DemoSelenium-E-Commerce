@@ -56,6 +56,7 @@ Screenshots after each test:
 - TC.1 User can add product in shopping cart
 - TC.2 User can add product in shopping cart and proceed checkout
 - TC.3 User can explore the product via 'More' button
+- TC.4 User can compare liked products 
 
 
 

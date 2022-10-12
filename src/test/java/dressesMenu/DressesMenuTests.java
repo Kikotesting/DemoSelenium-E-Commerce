@@ -18,6 +18,7 @@ public class DressesMenuTests extends BaseTest {
     AuthenticationPage authPage;
     AccountPage accPage;
     ProductPage productPage;
+    ComparePage comparePage;
     public void defaultLogin(){
         homePage = new HomePage(driver);
         authPage = new AuthenticationPage(driver);
@@ -187,6 +188,53 @@ public class DressesMenuTests extends BaseTest {
         // Close the zoom view
         productPage.productZoom_btnClose.click();
         productPage.pauseSeconds(2);
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("User can compare Items")
+    void compareProducts_TC4(){
+        homePage = new HomePage(driver);
+        dressPage = new DressesPage(driver);
+        comparePage = new ComparePage(driver);
+
+        homePage.menuDresses.click();
+        //List all items
+        dressPage.list_btn.click();
+        //Add products to compare
+        dressPage.addCompare_btn_PrintedDress.click();
+        dressPage.waitRefreshedResultText(dressPage.compareTotal_items,5,"1");
+        dressPage.addCompare_btn_PrintedDress2.click();
+        dressPage.waitRefreshedResultText(dressPage.compareTotal_items,5,"2");
+        dressPage.pauseSeconds(2);
+        //Go to Compare page
+        dressPage.compare_btn.click();
+        comparePage.scrollToElement(comparePage.header_Text);
+        //Verify the text and the prices
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productOne)
+                        .contains("100% cotton double"),
+                "Product is different!");
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productOne_price)
+                        .contains("$26.00"),
+                "Price is different!");
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productOne_Cotton)
+                        .contains("Cotton"),
+                "Distinct value");
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productTwo)
+                        .contains("Printed evening dress "),
+                "Product is different!");
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productTwo_price)
+                        .contains("$50.99"),
+                "Price is different!");
+        Assertions.assertTrue(comparePage.getTextFromElement(comparePage.productTwo_Viscose)
+                        .contains("Viscose"),
+                "Distinct value");
+        //Clear the compare products
+        comparePage.removeProduct_btn.click();
+        comparePage.pauseSeconds(5);
+        comparePage.removeProduct_btn.click();
+        // Assert that no product exist to remove
+        comparePage.waitToBeInvisible(comparePage.removeProduct_btn,5);
     }
 
 }
