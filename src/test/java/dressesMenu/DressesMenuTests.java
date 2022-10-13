@@ -192,7 +192,7 @@ public class DressesMenuTests extends BaseTest {
 
     @Test
     @Order(3)
-    @DisplayName("User can compare Items")
+    @DisplayName("User can compare Products")
     void compareProducts_TC4(){
         homePage = new HomePage(driver);
         dressPage = new DressesPage(driver);
